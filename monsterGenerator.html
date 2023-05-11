@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <style>
+            #monsterName {
+                width: fit-content;
+                block-size: fit-content;
+                display: inline-block;
+            }
+        </style>
+        <input type="button" value="Generate Monster" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate monsters
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://www.witchboy.net/articles/rpg-materials/the-monster-generator/
+            //data from https://nahuatl.wired-humanities.org/choose-letter/a
+
+        var dataList = {nameDraji : ["amech","apan","axca","aztli","bina","bolah","ca","cac","cacaxa","cafē","cah","cal","calaqui","catl","catl","catl","cazt","chin","cual","cuatl","cuexan","dar","desc","duq","eca","eca","ehe","ehuia","ehuil","eilhu","eimet","eltza","ezzo","fiēr","fuerza","fōlz","gach","guión","hua","huaca","huah","huatl","huax","huaxcu","huaztl","huia","huilo","ichca","icn","icnetz","icnoy","icuia","icxit","izqui","iztl","lan","lhuia","lichī","lilpiā","lirio","liā","lol","macha","macuil","maix","matl","maxa","mitl","mopech","moquetz","moxel","mulq","nacaz","nahuac","nezca","nihui","nohui","nono","oa","occan","ocyea","oquich","otlac","ozto","pahp","panah","panchi","pilpe","pixq","poto","puxc","puza","pān","pōtza","quex","quexq","quez","quezt","qui","quilp","quiā","rechō","reloj","tapay","teca","tecatl","titi","tot","toxop","toyāh","tozti","tzac","tzall","tzap","tzca","tze","tzetz","tzhui","tzinco","tzit","tzon","tzonc","tzupa","tēca","tōnī","ucuil","umitz","uztoh","xacal","xalli","xexe","xeyo","xicala","xihuix","xihxitl","xipetz","xipin","xiuh","xiuh","xiuh","xixil","xochi","xoct","xomo","xupa","xōchi","yaca","yacac","yacatz","yahual","yolip","yotl","yotl","zano","zatl","zazoa","zoqui","zoquio","zoquio","ēlmoy","ōztōct"],
+
+armourClass : [7,6,6,6],
+
+movement : [10,11,12,13,14],
+
+hitDice : [3,4,5,6,7,8],
+
+hitBonus : [3,4,5,6,7,8],
+
+THACO : [17,16,15,14,13,12,11],
+
+nOAttacks: [2,3,3,3,4],
+
+damage :  ["1d4","1d4","1d6","1d6","1d6","1d8","1d8","1d10","1d12"],
+
+shape :
+["lizard - quatroped",
+"mammal - quatroped",
+"mammal - bipedal",
+"slug or snail",
+"birdcreature",
+"serpentine",
+"ray",
+"fish",
+"plant",
+"insect",
+"blob",
+"baloon",
+"squid",
+"wine",
+"starfish"],
+
+skin : 
+["tough",
+"shadowy",
+"fleshy",
+"scaly",
+"spotty",
+"furry",
+"balding",
+"scabbed",
+"ridged",
+"spined",
+"moldy",
+"carapace like",
+"loose foldy",
+"ciliated",
+"bioluminescent",
+"transparent",
+"chameleonic",
+"slimy",
+"striped"],
+
+head : 
+["fangs",
+"slitted eyes",
+"pointed ears",
+"flapped, large ears",
+"oversized ears",
+"single eye",
+"multifaceted eyes",
+"multiple clustered eyes",
+"snout",
+"horns",
+"single horn",
+"crest",
+"mohawk",
+"under sized eyes",
+"multiple mouths",
+"spiked tongue",
+"expanded vocal sack",
+"discusting drool",
+"bone armour",
+"eye stalks",
+"forked tongue",
+"antlers",
+"antennae",
+"trunk",
+"headlessness",
+"tusks",
+"single tusk",
+"tentacles"],
+
+locomotion :
+["glide from heights",
+"running for days",
+"sprinting",
+"jumpping",
+"burrowing",
+"teleporting between its nests",
+"swimming",
+"brachiating",
+"dry up and tumble",
+"blinking",
+"silt walking",
+"fly",
+"posses another creature to carry it",
+"climbing"],
+
+appendages : 
+["retractable claws",
+"tentacles",
+"claws",
+"multiple limbs",
+"pseudopods",
+"pistoning limbs",
+"a tail",
+"multiple tails",
+"two heads",
+"mutated features",
+"a disgusting smell",
+"fins",
+"wings",
+"hoofed feet",
+"webbed appendages",
+"plumes",
+"exostosis",
+"spikes",
+"bone armour",
+"strange colors",
+"camouflage",
+"odd aura",
+"large appendages",
+"parasites",
+"whiskers",
+"talons"],
+
+attacks :
+["mind assault",
+"organic projectiles",
+"acid attack",
+"summon creature",
+"pyrotechnic attack",
+"gas attack",
+"venomous bite",
+"venomous claws",
+"clone it self",
+"thorns",
+"paralytic attack",
+"sonic shriek",
+"mental projection",
+"constriction attack",
+"sleep attack",
+"spirit leech",
+"shape shift"],
+
+defenses : 
+["invisibility",
+"blink",
+"play dead",
+"climb",
+"levitate",
+"darkness",
+"gas cloud",
+"assume noncorporeal form",
+"visual displacement",
+"quills",
+"stench",
+"bury self",
+"pocket dimension",
+"translucency",
+"armored",
+"shocking skin",
+"menacing appearance"]
+}; 
+
+            var attacks = 0;
+
+            function generateMission() { //Generates a monster from the lists
+                document.getElementById("missionText").innerHTML = `The <div id="monsterName">${returnValue("nameDraji")}${returnValue("nameDraji")}</div> is a ${returnValue("shape")} with ${returnValue("skin")} skin.  It has ${returnValue("appendages")} and its heads main feature is it's ${returnValue("head")}. It is capable of ${returnValue("locomotion")}. It has ${returnValue("attacks")} and ${returnValue("defenses")}.<br><br> \n
+                                                                    Its stats are:<br> \n
+                                                                    Armourclass:<br> ${returnValue("armourClass")}<br> \n
+                                                                    Movement:<br> ${returnValue("movement")} <br> \n
+                                                                    THAC0:<br> ${returnValue("THACO")}<br> \n
+                                                                    Hitdice:<br> ${returnValue("hitDice")} + ${returnValue("hitBonus")}<br> \n
+                                                                    Number of attacks: <div id="nOAttacks" style="width: auto">${returnValue("nOAttacks")}</div> <br> \n
+                                                                    Damage: <div id="damage"></div>`;
+
+                generateAttacks();
+                setUpperCase();
+
+            }
+
+            function setUpperCase() { //Sets the name of the monster to Uppercase
+                var monsterName = document.getElementById("monsterName").innerHTML;
+                console.log(monsterName);
+                document.getElementById("monsterName").innerHTML = monsterName.charAt(0).toUpperCase() + monsterName.slice(1);
+            }
+
+            function returnValue(list) { //Returns a value from the lists to the string 
+                var listLength = dataList[list].length;
+                var tempValue = dataList[list][Math.floor(Math.random() * listLength)];
+
+                if (list == "nOAttacks") {
+                    attacks = tempValue;
+                }
+
+                return tempValue;
+            }
+
+            function generateAttacks() { //Returns a dice for each attack
+                var tempList = "";
+
+                for (var i = 0; i < attacks; i++) {
+                    if (i == 0) {
+                        tempList += returnValue("damage");
+                    } else {
+                        tempList += ", " + returnValue("damage");
+                    }                  
+                }
+
+                document.getElementById("damage").innerHTML = tempList;
+
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+
+
+        </script>
+    </body>
+</html>

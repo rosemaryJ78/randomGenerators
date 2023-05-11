@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Mission" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://docs.google.com/document/d/1bHbAdoTQssPHp_wxWuHz3NSNyT_ZkhE4cqi-4qFkZ3A/edit#
+
+        var dataList = {commisionedBy : ["templars or palace agents",
+        "dome outsiders (traders or a wandering tribe)",
+        "water-hunters",
+        "an opioid monger",
+        "a merchant",
+        "a slavemaster",
+        "a spymaster",
+        "a witch-king’s secret representative",
+        "an agent",
+        "a pimp",
+        "a foreigner",
+        "an incognito representative The Invisible Order or Preserver Mystery"],
+        
+        toFind : ["find an individual",
+        "carry a package somewhere",
+        "escort someone",
+        "help with a ritual",
+        "be guards",
+        "help someone in trouble",
+        "find a lost treasure",
+        "gather information on a secretive group",
+        "kill someone",
+        "get the last member of a dying race or species",
+        "explore an area",
+        "stop a monster or threat"],
+        
+        dontKnow : ["a secretive faction (preservers, templars, merchant houses) are involved",
+        "A rogue agent or faction of The Invisible Order has an interest in this one",
+        "someone is not what they seem",
+        "interdimensional beings are involved",
+        "an inhuman entity stalks the party, their ward, or their patron",
+        "agents in the party or outside it will be ask to do something tough by their superiors",
+        "The Wurm itself or a witch-king has an interest in this mission",
+        "the bad guys will turn out to be the good guys this time",
+        "it will involve an unexpected visit to another location",
+        "a strange entity or item will get involved",
+        "someone from a PCs past will make an appearance",
+        "a spell-burner is mucking things up "]}; 
+
+            function generateMission() { //Generates a string with a mission from the 3 lists
+                document.getElementById("missionText").innerHTML = `The players are commissioned by ${returnValue("commisionedBy")} to ${returnValue("toFind")}, but what they dont know is that ${returnValue("dontKnow")}`;
+
+            }
+
+            function returnValue(list) { //Returns a value from the 3 lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
