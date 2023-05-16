@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate 10 Thri-Kreen names" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+
+        var dataList = {first : ["Cha", "Chuka", "Chu", "Dras", "Drik", "Hak", "Ka", "Ka", "Klik", "Lakta", "Lak", "Qhak", "Qhik", "Sa", "T", "Q", "K", "Ch", "Qu", "Qiq", "Niq", "Neq", "Tak", "Relka", "Rel", "Raq"],
+        
+        last : ["'ka", "-tet", "'sna", "-chkit", "'cha", "'tho", "'da", "-cho", "'cha", "-ik-cha", "-chaka'da", "'Relka", "'Chai", "-tha", "'qa", "-qak", "'zek", "'qeq", "-neq", "-mak", "'uq", "-zeq", "'cho", "-na", "'na"],
+        }; 
+
+            function generateMission() { //Generates a string with a mission from the lists
+
+                document.getElementById("missionText").innerHTML = "";
+
+                for (var i = 0; i < 5; i++) {
+                    document.getElementById("missionText").innerHTML += `${returnValue("first")}${returnValue("last")}<br>`;
+                    
+                }
+
+                for (var ix = 0; ix < 5; ix++) {
+                    document.getElementById("missionText").innerHTML += `${returnValue("first")}${returnValue("last")}${returnValue("last")}<br>`;
+                    
+                }
+
+            }
+
+            function returnValue(list) { //Returns a value from the lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
