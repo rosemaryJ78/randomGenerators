@@ -13,9 +13,10 @@
         <input type="button" value="Generate 10 Thri-Kreen names" onclick="generateMission()">
 
 <div id="missionText"></div>
-
-Data from:
-Thri-Kreen of Athas
+<br>
+Data from:<br>
+Thri-Kreen of Athas<br>
+<a href="https://archive.org/details/Polyhedron105/polyhedron%20magazine/61-80/Polyhedron%20075/page/n19/mode/2up">https://archive.org/details/Polyhedron105/polyhedron%20magazine/61-80/Polyhedron%20075/page/n19/mode/2up</a>
 
         <script type="text/javascript">
 
@@ -25,6 +26,17 @@ Thri-Kreen of Athas
         var dataList = {first : ["Cha", "Chuka", "Chu", "Dras", "Drik", "Hak", "Ka", "Ka", "Klik", "Lakta", "Lak", "Qhak", "Qhik", "Sa", "T", "Q", "K", "Ch", "Qu", "Qiq", "Niq", "Neq", "Tak", "Relka", "Rel", "Raq"],
         
         last : ["'ka", "-tet", "'sna", "-chkit", "'cha", "'tho", "'da", "-cho", "'cha", "-ik-cha", "-chaka'da", "'Relka", "'Chai", "-tha", "'qa", "-qak", "'zek", "'qeq", "-neq", "-mak", "'uq", "-zeq", "'cho", "-na", "'na"],
+
+        partOne : [
+        "Ahk", "Ak", "Chu", "Dok", "Dy", "Gak", "Go", "Gut", "Hk", "Ht", "Hy", "Jal", "Jk", "Kaar", "Klu", "Kri", "Kst", "Kt", "Lj", "Lk", "Loy", "Ng", "Nok", "Nuk", "Ny", "O", "Ok", "Ol", "On", "Rj", "Rk", "Sk", "Sot", "Ss", "T", "Tchu", "Tj", "Toy", "Xk"],
+
+        partTwo : [
+        "aj", "al", "at", "ath", "az", "da", "drd", "dul", "dy", "eth", "gax", "gry", "gut", "ht", "jk", "ka", "kaar", "kk", "kry", "lk", "nek", "ng", "ok", "ras", "rez", "rj", "schist", "sk", "syt", "t", "tchu", "til", "xa", "y", "yk", "yl", "yn", "zen"],
+
+        partThree : [
+        "ahk", "al", "ath", "chu", "chur", "dy", "eth", "gak", "ht", "jal", "jen", "kik", "krk", "kry", "kst", "kur", "kwi", "l", "lk", "loy", "n", "ny", "ol", "ras", "skar", "st", "sy", "t", "tet", "tlk", "urk", "uzd", "xk", "ya", "yl", "yn", "yus", "zan", "zen"],
+
+        breaks : ["'", "-"]
         }; 
 
             function generateMission() { //Generates a string with a mission from the lists
@@ -40,6 +52,14 @@ Thri-Kreen of Athas
                     document.getElementById("missionText").innerHTML += `${returnValue("first")}${returnValue("last")}${returnValue("last")}<br>`;
                     
                 }
+
+                document.getElementById("missionText").innerHTML += `<br>Polyhedron:<br>`;
+                    
+                for (var ix = 0; ix < 5; ix++) { 
+                    document.getElementById("missionText").innerHTML += `${returnValue("partOne")}${returnValue("breaks")}${returnValue("partTwo")}${returnValue("breaks")}${returnValue("partThree")}<br>`;
+                    
+                }
+
 
             }
 
