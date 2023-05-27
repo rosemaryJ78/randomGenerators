@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Mission" onclick="generateMission()">
+
+<div id="missionText"></div>
+<br><br>
+
+<div id="expandedDescriptionAge"></div>
+
+<br>
+
+<div id="expandedDescriptionDecor"></div>
+
+
+<br><br>
+data from :<br>
+<a href="https://trekhead.livejournal.com/96239.html">https://trekhead.livejournal.com/96239.html</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate magical items
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://trekhead.livejournal.com/96239.html
+
+        var ageNumber = 0;
+        var decorNumber = 0;
+
+        var dataList = {
+            age : [
+                    "ancient",
+                    "old",
+                    "old",
+                    "recent",
+                    "recent",
+                    "new"],
+        
+            artisticDecor : [
+                    "no",
+                    "subtle",
+                    "minimal",
+                    "decorated",
+                    "whimsical",
+                    "symbolic"],
+
+
+            quirk : [
+                    "it only works for a specific period of time (day, night, during the waxing of one of the moons, half of the months of the year, etc.)",
+                    "it is powerless when exposed to a specific element (e.g. if wielder is next to a fire at least the size of a bonfire, item loses its magical bonuses)",
+                    "it has powers only after exposed to a specific element for an hour (e.g. wielder must immerse the item in water for an hour in order for its power to become active, item must be left unattended in the sun for an hour, etc.); lasts for one day",
+                    "it only functions for characters of a specific race (thri-kreen, mul, etc.)",
+                    "it 's power does not work on one class of enemies (beasts, elementals, undead, etc.) or one specific social group (templars of Nibenay, clerics of Fire, etc.)",
+                    "it works for a given owner for one week, then works only for a different owner for a week. Must be traded to resume functioning. If traded back, remains inert until the current owner's week expires.",
+                    "it 's power only activates when wielder is at 1/2 maximum hit points or less.",
+                    "it 's power only activates when wielder is at more than 1/2 maximum hit points.",
+                    "it 'turns on' by activating it with 5% of the user's psionic power points (minimum 1). Lasts for 24 hours. If item is dropped or given away, it becomes inert again.",
+                    "it 'turns on' by activating it with the user's blood -- 5% of the user's hit points (minimum 1). Lasts for 24 hours. If item is dropped or given away, it becomes inert again.",
+                    "it  radiates magic with triple normal strength and radius.",
+                    "using it 's power causes defiling as if casting a spell of level equal to item's bonus (e.g. +1 sword causes defiling as if casting a 1st-level spell every time it hits).",
+                    "using it 's power causes water sources to dry up. Calculate range as if defiling and destroying plants, as entry 11. above, but this causes water sources to completely dry up and become empty instead of destroying plant life. This still causes pain in living creatures (due to dessication).",
+                    "it is fragile and subject to breakage like a normal item of its type, not as an enchanted item.",
+                    "it  has immediately recognizable characteristic or legendary history and many people will recognize it instantly (especially other magicians).",
+                    "it causes a penalty on certain skill checks. Choose two skills. Item causes a penalty on those skill checks equal to its bonus (2nd/3rd/4th edition) or grants disadvantage on those skills (5th edition) as long as it is carried or worn.",
+                    "it irritates psionic creatures nearby. Unintelligent psionic creatures seek out and attack the wielder to try to break the item. Range is dependent on item power (a good rule of thumb is, if the item could be detected with detect magic, it can be sensed at that range by a psionic beast.)",
+                    "using it's power angers elementals nearby. Determine range as entry 17., above, but with the added effect that clerics carrying the item cannot regain spells (as their elemental patrons will not respond to them). Could be used as a shackle for an imprisoned cleric...",
+                    "it temporarily loses its powers if it is in area of defiling magic. Powers are suppressed for 1 round per level of the defiling spell.",
+                    "using it's power within a city-state alerts sorcerer-king to its presence."
+            ],
+
+            ageDescription : [
+                    "Age:<br>Ancient -- This item is from an earlier age of Athas. It is possible that it has only survived to the current age due to its enchantments. If it is artistically embellished, the artwork may reflect creatures or settings that no longer exist.",
+                    "Age:<br>Old -- This item is from the current age, but it was created decades ago -- maybe even a century or more. The creator, if human or humanoid, probably isn't alive any more. The item probably doesn't have a reputation, unless it was used for a notorious deed in some place (a knife used for a series of killings in a city-state, a wand carried by a defiler who murdered several druids and terrorized a specific feature of the landscape, etc.).",
+                    "Age:<br>Old -- This item is from the current age, but it was created decades ago -- maybe even a century or more. The creator, if human or humanoid, probably isn't alive any more. The item probably doesn't have a reputation, unless it was used for a notorious deed in some place (a knife used for a series of killings in a city-state, a wand carried by a defiler who murdered several druids and terrorized a specific feature of the landscape, etc.).",
+                    "Age:<br>Recent -- This item was created in the last few years, possibly by a local enchanter, or maybe it made its way to the area after its creator was robbed, killed, or sold the item. People who knew the creator might recognize the item; it could have a local reputation in some areas.",
+                    "Age:<br>Recent -- This item was created in the last few years, possibly by a local enchanter, or maybe it made its way to the area after its creator was robbed, killed, or sold the item. People who knew the creator might recognize the item; it could have a local reputation in some areas.",
+                    "Age:<br>New -- This item was created very recently. The creator is probably only one or two steps removed from its falling into the hands of the player characters. It probably doesn't have a reputation yet, but if its creator was well-known the workmanship might be familiar to people who knew the creator."
+            ],
+
+            artisticDecorDescription : [
+                    "Artistic Decor:<br>None -- The item is purely functional.",
+                    "Artistic Decor:<br>Subtle -- The item has some sort of artwork built into it, but it is not apparent without close inspection (a pattern in the grain of wood or the fibers of cloth, a small number of colored spots that are out of place, a fresco that is so finely hewn that it can be felt but not seen).",
+                    "Artistic Decor:<br>Minimal -- Item has a single rune, picture, or piece of embellishment.",
+                    "Artistic Decor:<br>Decorated -- The item was made with several artistic choices, influencing its choice of material and also its form. The item is made of materials that may have some intrinsic value, specifically carved/woven/dyed/tanned/shaped to have a pleasing aesthetic, such as a wand with a smooth finish and tapered point that has an embedded ring of obsidian just under the tip, or a set of sandals with colored tassels on the ties and buttressed with polished pieces of petrified wood along the front to protect the toes.",
+                    "Artistic Decor:<br>Whimsical -- The item is decorated with patterns and symbols that might be representative of an idea, but are not necessarily a specific shape of a creature or other object (tiny stars all over its surface, a stylized flame picture, a bolt of lightning with lines radiating from the point of impact, a picture of a cloud).",
+                    "Artistic Decor:<br>Symbolic -- The item may be made to resemble a specific other object or creature (a wand that is shaped like a slender cactus, or a ring shaped with carved feet to look like a mekillot), or a natural phenomenon (a shirt with patterns in the dye-work to make it look like rain against a dark sky, a flask twisted into the shape of a sandstorm dust devil)."
+            ]
+        }; 
+
+            function generateMission() { //Generates a string with a mission from the 3 lists
+                document.getElementById("missionText").innerHTML = `The item is ${returnValue("age")} with ${returnValue("artisticDecor")} decor and ${returnValue("quirk")}`;
+                document.getElementById("expandedDescriptionAge").innerHTML = dataList.ageDescription[ageNumber];
+                document.getElementById("expandedDescriptionDecor").innerHTML = dataList.artisticDecorDescription[decorNumber];
+            }
+
+            function returnValue(list) { //Returns a value from the 3 lists to the string string
+
+                var listLength = dataList[list].length;
+
+                var tempNumber = Math.floor(Math.random() * listLength);
+
+                if (list == "age") {
+                    ageNumber = tempNumber;
+
+                } else if (list == "artisticDecor") {
+                    decorNumber = tempNumber;
+
+                };
+
+
+                return dataList[list][tempNumber];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
