@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Mission" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+<br><br>
+data from :<br>
+<a href="https://trekhead.livejournal.com/99990.html">https://trekhead.livejournal.com/99990.html</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://trekhead.livejournal.com/99990.html
+
+        var dataList = {terrain : [
+            "Shifting Winds: Place a pencil or pen on the map, then spin it. A strong wind blows in the direction that it points. This means that anyone trying to look or fire missile weapons into the direction of the wind takes an appropriate penalty (-4 in 2e/3e, disadvantage on Perception and physical ranged attacks in 5e). Change the wind's direction again on each initiative count 20. (Since there will probably be figures on the map, you may want to move the pen or pencil to one side and then spin it again, or just roll a d8 and use it to determine a direction in 45-degree increments).",
+            "Cacti: Various mundane cacti are scattered about the region. Grab a handful of dice and scatter them on the map. Each die is a cactus. A cactus is 6&ldquo; in height per die maximum (so a d4 = 2' high, d6 = 3' high, d12 = 6' high, and so on). Characters can use cacti for cover, or even move through their spaces as difficult terrain, but if you move through a cactus' space, make a Reflex/Dexterity saving throw (DC 10) or roll the cactus die for piercing damage. On the up side, each cactus has a 50% chance of having drinkable liquid inside if it's cut open; roll the cactus die to determine how many quarts. Each cactus with liquid inside also has a 50% chance for that liquid to be poisonous (Fortitude/Constitution saving throw DC 12 or vomit up the fluid, gaining no benefit and instead suffering from dehydration). Characters with appropriate Survival skills may be able to tell potable cactus juice from poisonous via a skill check.",
+            "Sinkholes: At the start of the battle, roll 1d8 and keep the die hidden. Each time someone completes a turn, count down the die by one. When you count down the die to 0, the next person to take their turn suffers from a small sinkhole opening in the sand beneath them. Make a Reflex/Dexterity saving throw (DC 12). If failed, the character falls prone. Then, roll the sinkhole die again and start counting for the next victim.",
+            "Boneyard: With each step, old, dry bones crunch under the PCs' feet, barely covered by a thin veneer of sand. Stealth becomes very difficult (-20% penalty to Move Silently, or -4/Disadvantage to Stealth skill checks). Each time a character moves, count up the number of spaces moved. When they finish moving for the turn, roll 1d10. If the character moved more spaces than the roll, their feet and legs are cut by jagged fragments of bone, inflicting piercing damage equal to the roll. Flying and levitating characters suffer no damage, of course.",
+            "Stone Columns: Grab a handful of dice and scatter them on the map. Each die represents a worn column of stone. The height of the column is equal to the value shown on the die, in feet. A column is just large enough for one Medium-sized creature to stand on it, and can be climbed as rough stone. Columns can also serve as cover.",
+            "Dune Peak: Roll, spin, or slide a pencil or pen so that it stops somewhere on the map. This line represents the peak of a dune. Travel toward the peak is uphill, considered difficult terrain; travel away is downhill. The dune is a fairly sharp climb, with each 5' space toward the peak counting as 2' of elevation change. Characters can freely move parallel to the line. Missile fire cannot draw a line of fire through the line, but someone standing on the peak (in a square that the line crosses through) can fire to both sides.",
+            "Strange Magnetism: Magically-charged ores in the ground accumulate odd electricity, which generates colorful auroras in the air. Roll 1d6 and conceal the die. Each time a character finishes a turn, count the die down once. When the die reaches 0, the next character to take a turn while wearing or wielding metal items suffers a sudden jolt of electricity that inflicts 2d6 electrical damage. The auroras and electricity then condense around the character, who may use their action to launch the lightning at a different target. If the target isn't wearing or carrying metal, the charge grounds harmlessly; reroll the original 1d6 and start counting down again. If the target is wearing or carrying metal, the blast inflicts 2d6 damage, and now that target holds the charge and may use it on their turn. If the charge kills a target, it grounds out; roll 1d6 again and start counting down once more. The charge dissipates harmlessly once the parly leaves the region.",
+            "Dust Devils: Roll 1d4, then scatter that many dice on the map. Each die is a dust devil 5' across and 10' high. Dust devils create concealment for anything drawing line of sight through them. Characters that pass through a dust devil must make a Fort/Constitution save (DC 12) or lose their action to choking, spitting out dust, and wiping dust out of their eyes. On initiative count 20 of each turn, each dust devil moves 6 spaces in a random direction (roll 1d8 for direction, with 1 = upper right of map, 2 = right, 3 = lower right, etc.) Dust devils can be dispersed with appropriate wind-control magic such as a gust of wind spell. Air and silt clerics can use their clerical abilities to ignore the dust devil's effects, and even use a dust devil for concealment from enemies by standing in it.",
+            "Wavy Reeds: Grab three dice and toss them onto the map. Then, draw lines connecting them. (For extra fun, use them to enclose a triangle.) This line represents a curtain of reedy grasses growing up out of the ground like fronds of wheat or cattails, easily 10' tall (which does mean that most half-giants can see over them, and thri-kreen may be able to jump over them). Any space with fronds in it offers total concealment to anything on the other side, but they're easily pushed aside and don't offer difficult terrain. Reeds can be cut down with 5 points of slashing or fire damage to a space.",
+            "Bubbling Pits: Superheated water lurks beneath the ground, causing occasional explosions of hot mud to burst to the surface. Roll 1d6 and conceal the die. Each time someone finishes a turn, decrement the die by one. When the die reaches zero, the next character has a boiling mud pit suddenly burst beneath them. Leave a mark on the map for difficult terrain. If the character fails a Reflex/Dexterity saving throw (DC 13), they take 2d6 fire damage. The muddy pit causes this same damage to anyone who moves through the space. The mud pits stop exploding after 3d4 of them have burst.",
+            "Slipsand: Roll 2d6 and conceal the dice. At the end of each character's turn, decrement the die total once. When the total reaches zero, the next character that is not flying or levitating finds itself suddenly sliding into a sandy hole. The character stops at waist deep. A character trapped in such a hole can either climb out (as if standing from prone) or continue to operate from this position (if casting spells, using psionics, or using a weapon). Fighting from such a position is awkward if using a melee weapon or bow (take a -4/disadvantage on attack rolls) but also gives the character half cover. (Using weapons that require lots of space, like pole arms or slings, may not be possible.) Once a character who climbs out of a pit (or leaves by other means such as teleportation or levitation), sand slides down and fills the hole. Once someone has fallen into a pit, reroll the dice and start counting down again.",
+            "Stone Storm: Once the map is set up, tear up a card or piece of paper into roughly 1&ldquo; pieces. Take six of these pieces and drop them on the map from a height of about two feet. (Don't use dice for this, as you don't want to damage your miniatures!) Any creature or object struck by a piece of paper is hit (or nearly missed) by a large stone falling from a nasty whirling dust storm in the sky above. If the target fails a DC 12 Reflex/Dexterity saving throw, this inflicts 1d6 bludgeoning damage. More stones fall every round on initiative count 20. The stones fall for 1d6 rounds of combat before the dust storm moves on."
+            ]}; 
+
+            function generateMission() { //Generates a string with a mission from the 3 lists
+                document.getElementById("missionText").innerHTML = `${returnValue("terrain")}`;
+            }
+
+            function returnValue(list) { //Returns a value from the 3 lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
