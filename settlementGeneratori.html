@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Mission" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+<br><br>
+data from :<br>
+<a href="https://trekhead.livejournal.com/95506.html">https://trekhead.livejournal.com/95506.html</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate settlements
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://trekhead.livejournal.com/95506.html
+            console.log(dataList);
+
+            var smallData = { //contains a small amount of data for generating springs
+            preserverDefiler : [
+                "preserver",
+                "preserver",
+                "preserver",
+                "preserver",
+                "preserver",
+                "defiler",
+            ],
+
+            elemental : [
+                "para-elemental",
+                "para-elemental",
+                "para-elemental",
+                "para-elemental",
+                "para-elemental",
+                "para-elemental",
+                "elemental",
+            ], 
+            spring : 
+            [
+                "",
+                "",
+                "hot"
+            ]
+            };
+
+            var dataList = {
+        
+        naturalFeature : [
+                "cliff face",
+                "quicksand",
+                "silt estuary",
+                "cactus field",
+                "obsidian field",
+                "mesa",
+                "cave",
+                "ruin",
+                "intersection of trails/animal runs",
+                "defiled ground",
+                "oasis",
+                "geyser(s)",
+                "mud flat",
+                "boulder field",
+                "colorful sand or rocks",
+                "hardy vines and root plants",
+                "tar pits",
+                "lava pools",
+                "shattered psionic crystals",
+                "enchanted fragments",
+                "Roll twice"
+        ],
+        
+        waterFoodSource : [
+            "oasis",
+            `${returnSmallValue("spring")}spring`,
+            "kank herds",
+            "erdlu herds",
+            "small lizards and mammals",
+            "raiding",
+            "trading",
+            "local cleric",
+            "bird flocks",
+            "bat flocks",
+            "stores from previous location (taken when fleeing/from a caravan/from former home)",
+            "succulent plants",
+            "honey bees",
+            "edible flowers, native fruit-bearing or leafy plants",
+            "well drilled into aquifer",
+            "rain-catches and cisterns",
+            "sand or rock crustaceans (crabs, insects)",
+            "worms and vermin",
+            "people",
+            "Roll twice"
+        ],
+
+        population : [ 
+            `a small family of ${returnAmount(2, 5)}`, 
+            `a large family of ${returnAmount(4, 10)}`,
+            `an extended family of ${returnAmount(6, 15)}`,
+            `a small mercenary group of ${returnAmount(3, 8)}`,
+            `a large mercenary company of ${returnAmount(6, 16)}`,
+            `a small group of escaped slaves ${returnAmount(3, 7)}`,
+            `a band of former slaves, ${returnAmount(5, 30)}`,
+            `an explorer and hired help, ${returnAmount(2, 7)}`,
+            `a ${returnSmallValue(`elemental`)} cleric and acolytes/followers, ${returnAmount(2, 11)}`,
+            `a psion and apprentices, ${returnAmount(2, 9)}`,
+            `a ${returnSmallValue(`preserverDefiler`)} and apprentices, ${returnAmount(2, 7)}`,
+            `a nomadic community, ${returnAmount(5, 30)}`,
+            `a split community of former slaves and non-slaves, ${returnAmount(6, 36)}`,
+            `a split community of magician (and possible apprentices), ${returnAmount(1, 4)}, and suspicious villagers, ${returnAmount(3, 18)}`,
+            `a split community of former merchants, mercenaries, or nobles at odds, ${returnAmount(5, 20)} on each side`,
+            `a small band of hunters & herders, ${returnAmount(4, 16)}`,
+            `a band of dwarves with a shared focus, ${returnAmount(3, 8)}`,
+            `a few travelers who got lost, ${returnAmount(4, 16)}`,
+            `some miners/treasure hunters/resource exploiters, ${returnAmount(4, 16)}`,
+            `Roll twice`
+        ],
+        
+        perils : [ 
+            "limited water supply",
+            "limited food supply",
+            "resource shortage (tool-making materials, clothing, fire fuel, etc.)",
+            "disease",
+            "poisonous plants",
+            "dangerous plants (razor vines, needle-shooting cactus, psychic strangler vines, etc.)",
+            "obsidian shards",
+            "sinkholes",
+            "gith",
+            "belgoi",
+            "thri-kreen",
+            "slavers",
+            "raiders",
+            "templar or templar group",
+            "giant(s)",
+            "angry elemental(s)",
+            "unknown thief",
+            "other nearby settlement",
+            "the Dragon",
+            "Roll twice"
+        ]
+    };     
+
+            function generateMission() { //Generates a string with a settlement from the lists
+                var naturalFeatureRoll, waterFoodSourceRoll, populationRoll, perilsRoll = 0;
+                var naturalFeatureRoll2, waterFoodSourceRoll2, populationRoll2, perilsRoll2 = 0;
+                var naturalFeatureText, waterFoodSourceText, populationText, perilsText = "";
+
+                naturalFeatureRoll = returnNumber();
+                waterFoodSourceRoll = returnNumber();
+                populationRoll = returnNumber();
+                perilsRoll = returnNumber();
+
+                if (naturalFeatureRoll == 19) {
+                    naturalFeatureRoll = returnNumber() - 1;
+                    naturalFeatureRoll2 = returnNumber() - 1;
+
+                    naturalFeatureText = `${returnSpecificValue("naturalFeature", naturalFeatureRoll)} and ${returnSpecificValue("naturalFeature", naturalFeatureRoll2)}`;
+                } else {
+                    naturalFeatureText = `${returnSpecificValue("naturalFeature", naturalFeatureRoll)}`;
+                }
+
+                if (waterFoodSourceRoll == 19) {
+                    waterFoodSourceRoll = returnNumber() - 1;
+                    waterFoodSourceRoll2 = returnNumber() - 1;
+
+                    waterFoodSourceText = `${returnSpecificValue("waterFoodSource", waterFoodSourceRoll)} and ${returnSpecificValue("waterFoodSource", waterFoodSourceRoll2)}`;
+                } else {
+                    waterFoodSourceText = `${returnSpecificValue("waterFoodSource", waterFoodSourceRoll)}`;
+                }
+
+                if (populationRoll == 19) {
+                    populationRoll = returnNumber() - 1;
+                    populationRoll2 = returnNumber() - 1;
+
+                    populationText = `${returnSpecificValue("population", populationRoll)} and ${returnSpecificValue("population", populationRoll2)}`;
+                } else {
+                    populationText = `${returnSpecificValue("population", populationRoll)}`;
+                }
+
+                if (perilsRoll == 19) {
+                    perilsRoll = returnNumber() - 1;
+                    perilsRoll2 = returnNumber() - 1;
+
+                    perilsText = `${returnSpecificValue("perils", perilsRoll)} and ${returnSpecificValue("perils", perilsRoll2)}`;
+                } else {
+                    perilsText = `${returnSpecificValue("perils", perilsRoll)}`;
+                }
+
+                document.getElementById("missionText").innerHTML = `Within the ${naturalFeatureText} you see ${populationText}, surviving on ${waterFoodSourceText} and ${perilsText} putting them in danger`;
+
+            }
+
+            function returnNumber() { //rolls a d20
+                return Math.floor(Math.random() * 20);
+            }
+
+            function returnAmount(low, high) { //returns the amount of members in a group, by giving a number between low and high
+                return Math.floor(Math.random() * (high - low)) + low;
+            }
+
+            function returnSpecificValue(list, roll) { //returns a specific value, needed for rerolling 20s
+                return dataList[list][roll];
+            }
+
+            function returnValue(list) { //Returns a value from the 3 lists to the string string smallData
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            function returnSmallValue(list) { //Returns a value from the 3 lists to the string string
+                var listLength = smallData[list].length;
+
+                return smallData[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+
+        </script>
+    </body>
+</html>
