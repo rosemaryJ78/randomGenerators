@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Mission" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+<br><br>
+data from :<br>
+<a href="https://trekhead.livejournal.com/95999.html">https://trekhead.livejournal.com/95999.html</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://trekhead.livejournal.com/95999.html
+
+        var dataList = {commisionedBy : [
+            "An ambitious templar",
+            "A Canny merchant",
+            "A Member of a loose thieves' association",
+            "A Member of the Veiled Alliance",
+            "A Desperate craftsperson/freeperson",
+            "A Haughty noble"
+        ],
+        
+        toFind : [
+        "increase personal power (for some reason that fits the overall group's agenda)",
+        "humiliate a rival",
+        "acquire incriminating documents/insider information from a rival group",
+        "make an example of someone",
+        "steal an heirloom/precious item/magical item/personal trinket",
+        "secure a personal project"
+        ],
+        
+        dontKnow : [
+        "a greedy enemy templar decides to put on pressure for a bribe.",
+        "the enemy knows what is coming.",
+        "an unforeseen magical or psionic event causes problems for everyone.",
+        "a separate group on a different mission crosses paths in the same place.",
+        "the information that the patron has about the situation is incorrect.",
+        "the patron double-crosses the players' characters."
+        ]}; 
+
+            function generateMission() { //Generates a string with a mission from the 3 lists
+                document.getElementById("missionText").innerHTML = `${returnValue("commisionedBy")} wants to ${returnValue("toFind")} and hires the group, but complications ensue when ${returnValue("dontKnow")}`;
+            }
+
+            function returnValue(list) { //Returns a value from the 3 lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
