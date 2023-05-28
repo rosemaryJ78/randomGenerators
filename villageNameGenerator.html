@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Village names" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+<br><br>
+data from :<br>
+<a href="https://www.reddit.com/r/DarkSun/comments/jdo6jj/dark_sun_village_name_generator/">https://www.reddit.com/r/DarkSun/comments/jdo6jj/dark_sun_village_name_generator/</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate Village names
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://www.reddit.com/r/DarkSun/comments/jdo6jj/dark_sun_village_name_generator/
+
+        var dataList = {"adjective" : 
+        [
+                        "Bitter",
+                        "Black",
+                        "Bloody",
+                        "Bright",
+                        "Hollow",
+                        "Last",
+                        "Lost",
+                        "Narrow",
+                        "New",
+                        "Red",
+                        "Stoney",
+                        "White"
+                        ],
+
+                        "beast" : 
+                        [
+                        "Dwarf",
+                        "Elf",
+                        "Falcon",
+                        "Giant",
+                        "Gith",
+                        "Kank",
+                        "Lirr",
+                        "Lizard",
+                        "Mekillot",
+                        "Snake",
+                        "Spider",
+                        "Tembo"
+                        ],
+
+                        "haven" : 
+                        [
+                        "Burrow",
+                        "Den",
+                        "Farm",
+                        "Hall",
+                        "Harbor",
+                        "Haven",
+                        "Home",
+                        "Lair",
+                        "Rest",
+                        "Retreat",
+                        "Roost",
+                        "Shelter"
+                        ],
+
+                        "material" : 
+                        [
+                        "Bone",
+                        "Bronze",
+                        "Chitin",
+                        "Clay",
+                        "Dust",
+                        "Flint",
+                        "Glass",
+                        "Gold",
+                        "Iron",
+                        "Ivory",
+                        "Stone",
+                        "Wicker"
+                        ],
+
+                        "military" : 
+                        [
+                        "Camp",
+                        "Castle",
+                        "Gate",
+                        "Guard",
+                        "Hold",
+                        "Keep",
+                        "Post",
+                        "Stand",
+                        "Tower",
+                        "Wall",
+                        "Ward",
+                        "Watch"
+                        ],
+
+                        "part" : 
+                        [
+                        "Breath",
+                        "Claw",
+                        "Eye",
+                        "Fang",
+                        "Glare",
+                        "Hand",
+                        "Heart",
+                        "Maw",
+                        "Shadow",
+                        "Skull",
+                        "Tooth",
+                        "Whisper"
+                        ],
+
+                        "person" : 
+                        [
+                        "Bard",
+                        "Defiler",
+                        "Drover",
+                        "Drunkard",
+                        "Hunter",
+                        "Maiden",
+                        "Raider",
+                        "Slaver",
+                        "Templar",
+                        "Trader",
+                        "Tyrant",
+                        "Widow"
+                        ],
+
+                        "place" : 
+                        [
+                        "Cavern",
+                        "Chasm",
+                        "Cliff",
+                        "Crag",
+                        "Gorge",
+                        "Hill",
+                        "Peak",
+                        "Pit",
+                        "Ridge",
+                        "Sand",
+                        "Sink",
+                        "Spire"
+                        ],
+
+                        "stuff" : 
+                        [
+                        "Bell",
+                        "Boulder",
+                        "Coin",
+                        "Crown",
+                        "Drum",
+                        "Grave",
+                        "Knife",
+                        "Light",
+                        "Ring",
+                        "Shield",
+                        "Spear",
+                        "Star"
+                        ],
+
+                        "water" : 
+                        [
+                        "Basin",
+                        "Cistern",
+                        "Creek",
+                        "Font",
+                        "Pond",
+                        "Pool",
+                        "Puddle",
+                        "Spring",
+                        "Stream",
+                        "Wallow",
+                        "Water",
+                        "Well"
+                        ]}; 
+
+            var nameVariations = [
+                    `${returnValue("adjective")} ${returnValue("military")} <br> `,
+                    `${returnValue("adjective")} ${returnValue("place")} <br> `,
+                    `${returnValue("adjective")} ${returnValue("place")}  ${returnValue("military")}<br> `,
+                    `${returnValue("adjective")} ${returnValue("water")} <br> `,
+                    `${returnValue("beast")}'s ${returnValue("haven")} <br> `,
+                    `${returnValue("beast")}'s ${returnValue("part")} ${returnValue("haven")} <br> `,
+                    `${returnValue("beast")}'s ${returnValue("part")} ${returnValue("place")} <br> `,
+                    `${returnValue("beast")}'s ${returnValue("place")} <br> `,
+                    `${returnValue("beast")}'s ${returnValue("water")} <br> `,
+                    `${returnValue("material")} ${returnValue("haven")} <br> `,
+                    `${returnValue("material")} ${returnValue("military")} <br> `,
+                    `${returnValue("material")} ${returnValue("place")} <br> `,
+                    `${returnValue("material")} ${returnValue("part")} ${returnValue("place")} <br> `,
+                    `${returnValue("material")} ${returnValue("part")} ${returnValue("haven")} <br> `,
+                    `${returnValue("material")} ${returnValue("part")} ${returnValue("military")} <br> `,
+                    `${returnValue("material")} ${returnValue("part")} ${returnValue("water")} <br> `,
+                    `${returnValue("material")} ${returnValue("water")} <br> `,
+                    `${returnValue("person")}'s ${returnValue("haven")} <br> `,
+                    `${returnValue("person")}'s ${returnValue("military")} <br> `,
+                    `${returnValue("person")}'s ${returnValue("part")} ${returnValue("military")} <br> `,
+                    `${returnValue("person")}'s ${returnValue("place")} <br> `,
+                    `${returnValue("person")}'s ${returnValue("stuff")} ${returnValue("haven")} <br> `,
+                    `${returnValue("person")}'s ${returnValue("water")} <br> `,
+                    `${returnValue("stuff")} ${returnValue("place")} <br>`,
+                    `${returnValue("stuff")} ${returnValue("military")} <br>`,
+                    `${returnValue("stuff")} ${returnValue("water")} <br>`,
+                    `${returnValue("stuff")} ${returnValue("haven")} <br>`
+            ]
+
+            function generateMission() { //Generates a string with name of villages from the lists
+                document.getElementById("missionText").innerHTML = "";
+
+                for (var i = 0; i < 5; i++) {
+                    document.getElementById("missionText").innerHTML += nameVariations[Math.floor(Math.random() * 20)];
+                    var delay = 100;
+
+                    setTimeout(function() {}, delay);
+                }
+
+            }
+
+            function returnValue(list) { //Returns a value from the lists to the string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+
+            generateMission(); //Generates a list of names when loading page
+
+        </script>
+    </body>
+</html>
