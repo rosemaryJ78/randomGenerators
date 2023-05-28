@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Mission" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+<br><br>
+data from :<br>
+<a href="https://arena.athas.org/t/dark-sun-familiar-list-d30-roll/2242">https://arena.athas.org/t/dark-sun-familiar-list-d30-roll/2242</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://arena.athas.org/t/dark-sun-familiar-list-d30-roll/2242
+
+        var dataList = {familiar : [
+                            "bat",
+                            "beetle, hurrum",
+                            "cat",
+                            "pseudodragon",
+                            "rat",
+                            "scorpion, golden",
+                            "snake, venomous",
+                            "snake, non-venomous",
+                            "desert owl",
+                            "critic",
+                            "kip",
+                            "z’tal",
+                            "jankx",
+                            "agony beetle",
+                            "kes’trekel",
+                            "mini-kank (winged)",
+                            "rasclinn",
+                            "zhackal",
+                            "aprig",
+                            "baazrag",
+                            "gorak",
+                            "jhakar",
+                            "spider/silt spider if location is proper",
+                            "spider, non-venomous",
+                            "xerichou",
+                            "sable sandworm",
+                            "centipede, giant",
+                            "hawk/raptor",
+                            "dm’s choice",
+                            "player’s choice"
+        ]}; 
+
+            function generateMission() { //Generates a string with a mission from the 3 lists
+                document.getElementById("missionText").innerHTML = `Your familiar is ${returnValue("familiar")}.`;
+
+            }
+
+            function returnValue(list) { //Returns a value from the 3 lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
