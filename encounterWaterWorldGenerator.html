@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Encounter" onclick="generateMission()">
+
+<div id="missionText"></div>
+
+<br><br>
+data from :<br>
+<a href="https://docs.google.com/spreadsheets/d/1E3rSDfpTmhrsA53QafNxas1GwRBQ-UiYZaSDC_Z781Q/edit#gid=2091014719">https://docs.google.com/spreadsheets/d/1E3rSDfpTmhrsA53QafNxas1GwRBQ-UiYZaSDC_Z781Q/edit#gid=2091014719</a>
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+            //data from https://docs.google.com/spreadsheets/d/1E3rSDfpTmhrsA53QafNxas1GwRBQ-UiYZaSDC_Z781Q/edit#gid=2091014719
+
+        var dataList = {encounter : ["The party encounters a strange merchant. He sells old-world antiques for cheap. All of his items are rusted, defective merchandise.",
+                                        "The party encounters two drifters. &ldquo;Give us Hydro and we won't steal your ship!&ldquo; They are dumb and cowardly.",
+                                        "Encounter a well armed caravan. They are travelling to a nearby Atoll, (1-4) You are not welcome. (5) You may follow behind. (6) They will trade with you and offer to go together.",
+                                        "Encounter a broken and burned down float. It is abandoned.",
+                                        "Encounter a drifter. He asks where the nearest settlement is. Wherever the party points, he immediately sails in the opposite direction without saying anything.",
+                                        "You find a strange soothsayer who will aid you for hydro, but they do not specify how. (1) They restore you to full health and remove any ailments. (2) Increases your CON by 4 for D6 days. (3) Gives +3 to all skills for D6 days. (4) Permanently increases your max health by 1. ",
+                                        "There is an abandoned ship on the horizon as night sets in. The party awakens to find many men fighting over an item. When they notice the party, they flee, leaving the party and the item behind.",
+                                        "The party sees a plane fly overhead. If 18-20 (d20), an item falls from the plane and floats on the waters below.",
+                                        "A traveler is obsessed with finding an object.",
+                                        "A dying trader refuses to succumb until he passes on his parcel and the quest it involves.",
+                                        "Extremely bad weather. Hurricane, thunder storm, rogue wave, heat wave, depending on the region.",
+                                        "Encounter a traveling medical trader.",
+                                        "Encounter a traveling fish vendor.",
+                                        "Encounter a traveling seed vendor.",
+                                        "Encounter a traveling arms dealer.",
+                                        "Escaped slaves beg you to save them. Their owner can be seen on the horizon, approaching fast.",
+                                        "A party strangely similar to your own passes by.",
+                                        "Encounter a wounded young man on a buoy.",
+                                        "An old man in need of food and water. He will try to kill the group if they do not help.",
+                                        "A bounty hunter passes by, and stops your party to investigate everyone.",
+                                        "See a plane and an airship dogfighting overhead. (1-4) The plane eventually gives up and flies away. (5) One of them is soundly defeated and crashes into the water. (6) Both are severely damaged and crash into the water.",
+                                        "You find a small buoy ball attached to a rope. The other end has a well-sealed bag full of (d6) fists dirt.",
+                                        "The largest sea creature you have ever seen breaks the surface of the water nearby.",
+                                        "The next encounter you find a shiny coin. You have good luck for two days. (You can reroll once per day)",
+                                        "You find a pack of Eater Fish feasting on a large nearby corpse.",
+                                        "You find an unusually large group of nomad drifters.",
+                                        "Two large sea creatures are attacking each other.",
+                                        "There is a huge oil fire nearby, but no sign of what happened.",
+                                        "Encounter a cannibal drifter.",
+                                        "Hear an explosion in the air like thunder. Nothing else.",
+                                        "A cartographer passes by and asks for notes on his map.",
+                                        "Find what appears to be a group of people starting up a new atoll.",
+                                        "A looter tells you he's headed to a recently destroyed atoll, he offers to take you there, for a price.",
+                                        "A strange cultist in worn robes passes by, and screams obscenities, saying 'It's coming for you!'",
+                                        "A random character contracts food poisoning from bad food.",
+                                        "Encounter a thief.",
+                                        "A meteor flies overhead.",
+                                        "Encounter a well armed slaver ship.",
+                                        "Discover the corpse of a very rare sea creature.",
+                                        "Travelers warn you of a nearby Smoker settlement.",
+                                        "A group of (2d6) people beg for work in exchange for food and safety.",
+                                        "Bandits hold you up for 5 fists of Hydro each.",
+                                        "An outcrop of bundled ships is discovered. It is infested with Lurkers.",
+                                        "You are ambushed by Smokers.",
+                                        "You are ambushed by Lurkers.",
+                                        "You are ambushed by incompetent bandits.",
+                                        "A Traveler goes by screaming &ldquo;I won the lottery - I don't care, my troubles are over! - I'll never have to worry again - etc.&ldquo; You later learn that the lottery was for his freedom from slavery.",
+                                        "Bodies of bandits litter the water.",
+                                        "A bounty hunter is looking for you.",
+                                        "You encounter a group of four scrawny young men, they would like to travel with you. The entire time they talk about going to Redwall, a perfect city. No one has ever heard of it before.",
+                                        "You encounter a small group of people trying to salvage a wreck.",
+                                        "Pilgrims are travelling to a nearby island.",
+                                        "Freak weather forcing the party to shelter with someone else. Can be hostile or friendly.",
+                                        "A buoy ahead is marked by hanged bandits.",
+                                        "A lost child. (1) The parents will reward handsomely. (2) The parents have nothing to offer. (3) The child is bait, leading the party to a group of Smokers.",
+                                        "Encounter a pack of Lurkers. Not hostile, but curious.",
+                                        "(d6) Lurkers feasting on human remains.",
+                                        "You find someone's journal detailing (1) A dropoff point (2) a to-do list with ordinary tasks.",
+                                        "A large boat drifts by the party. It is completely abandoned.",
+                                        "A hard rain pours down for the next (2d6) days.",
+                                        "You encounter a well armed and well equipped man. He is searching for his wife.",
+                                        "You find slavers capturing and raiding a nearby boat.",
+                                        "You encounter a tall, abandoned float. At the top (1) There is paper which can be read for +1 Permanent INT if deciphered. (2) The float begins to collapse on the party.",
+                                        "You find a jar floating in the water. If drank: (1) Permanent +1 Constitution. (2) You are poisoned and rendered unconscious for a day.",
+                                        "You encounter a crippled young man who can not walk because he was shot in the leg. Later in the campaign you meet again, he has invented a brace to help him walk. If you helped him earlier, he rewards you with an item.",
+                                        "A small-time slaver offers you a pick of his most recent catch.",
+                                        "Encounter a man who has a tattoo for every man he's ever killed.",
+                                        "Encounter an ex-smoker trying to settle down. His ship has run out of fuel and is adrift.",
+                                        "Encounter a drifter with a huge collection of knicknacks.",
+                                        "A drifter regards a party member as &ldquo;The perfect mate&ldquo;",
+                                        "A shady character asks you to smuggle some barrels into an atoll.",
+                                        "One of the party members is offered a slave boy as a reward for a job well done.",
+                                        "A large cache of old-world tech is discovered. Smoker scouts are seen nearby. Will the party leave the find? Sink it? Or something else?",
+                                        "Lurkers are attacking an abandoned ship that has been reclaimed by traders."]}; 
+
+            function generateMission() { //Generates a string with a mission from list
+                document.getElementById("missionText").innerHTML = `Waterworld encounter: ${returnValue("encounter")}.`;
+
+            }
+
+            function returnValue(list) { //Returns a value from the list to the string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates an encounter when loading page
+
+        </script>
+    </body>
+</html>
