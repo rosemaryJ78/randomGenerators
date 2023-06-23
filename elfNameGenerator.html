@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Encounter" onclick="generateMission()">
+
+<div id="missionText"></div>
+<br><br>
+data from :<br>
+Own
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+
+        var dataList = {
+            maleFirst : ["Aby", "Bo", "Cora", "Dukko", "Ee", "Ga", "Haa", "Ika", "Jaara", "Ka", "Lobu", "Muta", "Nuu", "Quaa", "Radu", "Sor", "Traa", "Dak", "Tha", "Ry", "Vul", "Ala", "Lya", "Tol", "Ai", "Tass", "Ado", "Ren", "Thac"],
+
+            maleLast : ["uuk", "tuu", "anu", "ti", "vuu", "lek", "ku", "n", "thak", "u", "bu-u", "mi", "tami", "ko", "r", "ar", "rak", "ak", "ath", "nar", "fon", "ith", "ri", "ethel"],
+
+            femaleFirst : ["Ala", "Aree", "Cel", "Derys", "Eke", "El", "Ena", "Esy", "Gris", "Guu", "Huk", "Itte", "Jeil", "Jei", "Kat", "Kee", "Nuu", "Ny", "Ta", "Qa", "Ma", "Na", "Nal", "Mal", "Qal", "Shan", "Shal", "Uta", "Yal", "Val", "Zal", "Shen", "Vies", "Fay"],
+
+            femaleLast : ["a", "la", "ba", "sa", "e", "as", "me", "ma", "lk", "si", "ta", "qa", "aa", "a-a", "za", "tza", "orr", "lorr", "ta", "sia", "ia", "ana", "na", "iona", "lia", "ara", "eria", "ira", "ni-i"],
+
+            tribeFirst : ["Clear", "Silt", "Mud", "Dune", "Dust", "Rock", "Wind", "Bone", "Blood", "Sweet", "Old", "Gold", "Dry", "Grey", "Yellow", "Brown", "Black", "Red", "White", "Stone", "Lost", "Bone", "Clay", "Bronce", "Copper", "Spear", "Knife", "Club", "Axe"],
+
+            tribeLast : ["water", "wind", "sky", "flat", "river", "barrens", "desert", "forest", "sea", "cave", "valley", "blood", "running", "hand", "claw", "leg", "foot", "eye", "raider", "hunter", "cliff", "hill", "sand", "pool"]
+
+        }; 
+
+            function generateMission() { //Generates a string with a mission from the lists
+                document.getElementById("missionText").innerHTML = `
+                You see two elfs of the ${returnValue("tribeFirst")}${returnValue("tribeLast")} tribe, <br>
+                the male is ${returnValue("maleFirst")}${returnValue("maleLast")} and <br>
+                the female is ${returnValue("femaleFirst")}${returnValue("femaleLast")}`;
+
+            }
+
+            function returnValue(list) { //Returns a value from the lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
