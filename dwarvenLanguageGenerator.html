@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Dwarven word" onclick="generateMission()">
+
+<div id="missionText"></div>
+<br><br>
+data from :<br>
+Some dark sun sroucebook
+
+        <script type="text/javascript">
+
+            //dataList contains all the data to generate missions
+            //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
+
+        var dataList = {
+            first : ["ke", "ma", "ur", "ho", "dur", "go"],
+
+            last : ["mous", "nis", "lok"]
+
+                };       
+
+            function generateMission() { //Generates a string with a mission from the lists
+                document.getElementById("missionText").innerHTML = `
+                Dwarven language:<br> ${returnValue("first")}${returnValue("last")}, <br>
+                ${returnValue("first")}${returnValue("first")}${returnValue("last")} <br>`;
+
+            }
+
+            function returnValue(list) { //Returns a value from the lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateMission(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
