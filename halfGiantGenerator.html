@@ -18,19 +18,23 @@ data from :<br>
 My own
 
         <script type="text/javascript">
-
-            //dataList contains all the data to generate missions
+var dataList = {};
+var dataListSmaller = {};
+var dataListSmall = {};
+            //dataList contains all the data to generate missions 
             //to add more, add a text string in "", inside the correct [], adding a comma in the end will cause an error
 
+function setDatalistSmaller() {
+        dataListSmaller = {
 
-        var dataListSmaller = {
-
-            tatoo : [`human`, `n elf`, `mul`, `dwarf`, `giant`, `n aaracocra`, `thri-kreen`, `dragon, defiler`, `templar`, `warrior`, `gladiator`, `druid`, `slave`, `bird`, `lizard`, `mekillot`, `kank`, `cudlu`, `wagon`, `siltskimmer`, `bottle`, `cup`, `axe`, `sword`, `shield`, `helmet`, `dagger`, `feather`, `tree`, `forest`, `dune`, `mountain`, `oasis`, `sand storm`, `fire`, `flower`, `pipe`, `roasted leg of meat`, `skull`, `bone`, `pile of bones`], 
+            tatoo : [`human`, `n elf`, `mul`, `dwarf`, `giant`, `n aaracocra`, `thri-kreen`, `dragon`, `defiler`, `templar`, `warrior`, `gladiator`, `druid`, `slave`, `bird`, `lizard`, `mekillot`, `kank`, `cudlu`, `wagon`, `siltskimmer`, `bottle`, `cup`, `axe`, `sword`, `shield`, `helmet`, `dagger`, `feather`, `tree`, `forest`, `dune`, `mountain`, `oasis`, `sand storm`, `fire`, `flower`, `pipe`, `roasted leg of meat`, `skull`, `bone`, `pile of bones`], 
 
             crime : [ `rebel`, `thief`, `rapist`, `murderer`, `arsonist`, `violent person`, `runaway slave`]
-        }
-        
-        var dataListSmall = {
+        };
+};
+
+function setDatalistSmall() {
+        dataListSmall = {
 
             face : ["eyes", "nose", "lips", "ears", "jaw", "forehead", "cheecks", "chin", "backhead", "eyebrows", "teeth"],
 
@@ -46,27 +50,33 @@ My own
 
             skin : [`fair`, `medium`, `olive`, `brown`, `dark brown`, `black`, `sandy`, `honey`, `caramel`, `tawny`, `bronze`, `amber`, `mahogany`], 
 
-            class : ["cleric", "fighter", "gladiator", "psionicist", "ranger"],
+            class : ["cleric", "fighter", "gladiator", "psionicist", "ranger", "slave", "worker", "citizen", "soldier"],
 
-            sized : ["oversized", "undersized", "asymetric"],
+            sized : ["oversized", "undersized", "asymmetric"],
 
             bigSmall : ["elongated", "shortened"],
 
-            bigParts : ["legs", "torso", "neck", "head", "arms"]
+            bigParts : ["legs", "torso", "neck", "head", "arms"],
 
-        }
+            eyeColor : []
 
+        };
+};
 
-        var dataList = {
+function setDatalist() {
+        dataList = {
 
             hairStyle : ["bold head", `bolding ${returnValue("dataListSmall", "hairColor")} hair`, `long ${returnValue("dataListSmall", "hairColor")} dreadlocks`, `long ${returnValue("dataListSmall", "hairColor")} hair and a ponytail`, `${returnValue("dataListSmall", "hairColor")} mohawk`, `very short ${returnValue("dataListSmall", "hairColor")} hair`, `short ${returnValue("dataListSmall", "hairColor")} hair`, `long ${returnValue("dataListSmall", "hairColor")} straight hair`, `long ${returnValue("dataListSmall", "hairColor")} curly hair`, `${returnValue("dataListSmall", "hairColor")} afro`, `long ${returnValue("dataListSmall", "hairColor")} hair in a bun`, `${returnValue("dataListSmall", "hairColor")} comb over`, `${returnValue("dataListSmall", "hairColor")} crown braid`, `${returnValue("dataListSmall", "hairColor")} bangs`, `${returnValue("dataListSmall", "hairColor")} devil look hairstyle`, `${returnValue("dataListSmall", "hairColor")}french braid`, `${returnValue("dataListSmall", "hairColor")} mullet`, `long ${returnValue("dataListSmall", "hairColor")} braids`, `${returnValue("dataListSmall", "hairColor")} shag cut`, `asymmetric ${returnValue("dataListSmall", "hairColor")} hair`, `${returnValue("dataListSmall", "hairColor")} cornrows`],
 
-            stuff : [`with a tatoo of ${returnValue("dataListSmall", "tatoos")}`, `with a stylized tatoo of ${returnValue("dataListSmall", "tatoos")}`, `with a ${returnValue("dataListSmall", "shape")} scar across the ${returnValue("dataListSmall", "face")}`, `with a ${returnValue("dataListSmall", "shape")} scar across the ${returnValue("dataListSmall", "smallPart")}`, `with a ${returnValue("dataListSmall", "shape")} scar across the ${returnValue("dataListSmall", "bigParts")}`, `with a pierced ${returnValue("dataListSmall", "face")}, multiple piercings in ${returnValue("dataListSmall", "face")}, ${returnValue("dataListSmall", "face")} and ${returnValue("dataListSmall", "face")}`, `with a sloppy walk`, `with a hunchback`, `with a limp`, `with a mouth full of rotten teeth`, `with a putric smell on them`, `with the smell of perfume on them`, `carrying a huge a bag`, `followed by a small lizard`, `ridden by a ${returnValue("dataListSmall", "sex")} halfling`, `singing loud and out of tune`, `talking to themself`, `chewing some tough jerky`, `collecting coloured stones`, `greasy from honey and ignoring a swarm angry bees`, `carrying a makeshift shelter`, `carrying a huge waterskin on their back`, `trying to remove a cactus needle from a finger`, `with wild eyes`,  `with injuries from being chained`, `with a bad infection`,  `with an arrogant look`,  `with an evil grin`, `in a templar uniform`]
+            stuff : [`with a tatoo of ${returnValue("dataListSmall", "tatoos")}`, `with a stylized tatoo of ${returnValue("dataListSmall", "tatoos")}`, `with a ${returnValue("dataListSmall", "shape")} scar across the ${returnValue("dataListSmall", "face")}`, `with a ${returnValue("dataListSmall", "shape")} scar across the ${returnValue("dataListSmall", "smallPart")}`, `with a ${returnValue("dataListSmall", "shape")} scar across the ${returnValue("dataListSmall", "bigParts")}`, `with a pierced ${returnValue("dataListSmall", "face")}, multiple piercings in ${returnValue("dataListSmall", "face")}, ${returnValue("dataListSmall", "face")} and ${returnValue("dataListSmall", "face")}`, `with a sloppy walk`, `with a hunchback`, `with a limp`, `with a mouth full of rotten teeth`, `with a putric smell on them`, `with the smell of perfume on them`, `carrying a huge a bag`, `followed by a small lizard`, `ridden by a ${returnValue("dataListSmall", "sex")} halfling`, `singing loud and out of tune`, `talking to themself`, `chewing some tough jerky`, `collecting coloured stones`, `greasy from honey and ignoring a swarm angry bees`, `carrying a makeshift shelter`, `carrying a huge waterskin on their back`, `trying to remove a cactus needle from a finger`, `with wild eyes`,  `with injuries from being chained`, `with a bad infection`,  `with an arrogant look`,  `with an evil grin`, `in a templar uniform`, "with spotted skin", "who are extremely dirty"]
 
         }; 
-
+};
 
             function generateMission() { //Generates a string with a mission from the lists
+                setDatalistSmaller();
+                setDatalistSmall();
+                setDatalist();
                 document.getElementById("missionText").innerHTML = `
                 You see a ${returnValue("dataListSmall", "sex")} half-giant ${returnValue("dataListSmall", "class")}, <br>
                 with ${returnValue("dataListSmall", "sized")} ${returnValue("dataListSmall", "face")}, ${returnValue("dataListSmall", "sized")} ${returnValue("dataListSmall", "smallPart")},
