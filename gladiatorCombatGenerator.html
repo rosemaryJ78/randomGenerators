@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        <style>
+                .powerTracker {
+                        height: 25px;
+                        margin: 0 0 0 0;
+                        float: left;  
+                }
+        </style>
+<input type="button" Id="appendStats" value="Show stats" onclick="showHide('appendStats', this, 'stats')" style="display: none;"><br>
+<input type="button" Id="tempWinner" value="Show upperhand" onclick="showHide('tempWinner', this, 'upperhand')" style="display: none;"><br>
+<input type="button" Id="nerdyStuff" value="Show calculations" onclick="showHide('nerdyStuff', this, 'calculations')" style="display: none;"><br>
+<input type="button" id="setGladiators" value="Set gladiators" onclick="setGladiators()"><br>
+<input type="button" value="Let the fight begin!" onclick="generateFight()" id="fightBegin"> 
+<ul id="appendHere"></ul>
+
+
+
+<div id="outerWrapper">
+        <div class="innerWrapper">
+                <form>
+                        <h3>Gladiator 1</h3> Name: <input type="text" id="name1" value="Kzi-Tzi">
+                        <br> <label for="sex1">Sex:</label>
+                        <select id="sex1" name="sex1"> 
+                                <option value="Male" selected>Male</option>
+                                <option value="Female">Female</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="race1">Race:</label>
+                        <select id="race1" name="race1" onclick="showOtherOption('1', 'raceOther')"> 
+                                <option value="Human" selected>Human</option>
+                                <option value="Elf">Elf</option>
+                                <option value="Half elf">Half elf</option>
+                                <option value="Other">Other</option>
+                                <option value="Dwarf">Dwarf</option>
+                                <option value="Mul">Mul</option>
+                                <option value="Half giant">Half giant</option>
+                                <option value="Halfling">Halfling</option>
+                                <option value="Thri-kreen" selected>Thri-kreen</option>
+                                <option value="Aarakocra">Aarakocra</option>
+                        </select>
+                        <input type="text" id="raceOther1" style="display : none;">
+
+                        <br> Blood color: <input type="text" value="red" id="bloodColor1"><br>
+
+                        Primary weapon: <select id="weaponPrimary1" name="weaponPrimary1" onclick="showOtherOption('1', 'weaponPrimaryOther')">
+                                <option value="dagger" selected>dagger</option>
+                                <option value="sword">sword</option>
+                                <option value="long sword">long sword</option>
+                                <option value="Other">Other</option>
+                                <option value="great sword">great sword</option>
+                                <option value="twohanded sword">twohanded sword</option>
+                                <option value="axe">axe</option>
+                                <option value="battle axe">battle axe</option>
+                                <option value="two handed axe">two handed axe</option>
+                                <option value="spear">spear</option>
+                                <option value="club">club</option>
+                                <option value="twohanded handed club">twohanded handed club</option>
+                                <option value="halebard">halebard</option>
+                                <option value="whip">whip</option>
+                                <option value="staff">staff</option>
+                                <option value="singing sticks">singing sticks</option>
+                                <option value="war hammer">war hammer</option>
+                                <option value="maul">maul</option>
+                                <option value="chatkcha">chatkcha</option>
+                                <option value="gythka">gythka</option>
+                                <option value="shield">shield</option>
+                        </select>
+                        <input type="text" id="weaponPrimaryOther1" style="display : none;">  
+                        
+                        Material: <select id="weaponPrimaryMaterial1" name="weaponPrimaryMaterial1" onclick="showOtherOption('1', 'weaponPrimaryMaterialOther')">
+                                <option value="stone" selected>stone</option>
+                                <option value="bone">bone</option>
+                                <option value="wood">wood</option>
+                                <option value="Other">Other</option>
+                                <option value="obsidian">obsidian</option>
+                                <option value="bronze">bronze</option>
+                                <option value="iron">iron</option>
+                                <option value="steel">steel</option>
+                                <option value="chitin">chitin</option>
+                                <option value="wicker">wicker</option>
+                                <option value="lizard scale">lizard scales</option>
+                                <option value="leather">leather</option>
+                        </select>
+                        <input type="text" id="weaponPrimaryMaterialOther1" style="display : none;">
+
+                        <br> Secondary weapon: <select id="weaponSecondary1" name="weaponSecondary1" onclick="showOtherOption('1', 'weaponSecondary')">
+                                <option value="dagger" selected>dagger</option>
+                                <option value="sword">sword</option>
+                                <option value="long sword">long sword</option>
+                                <option value="Other">Other</option>
+                                <option value="great sword">great sword</option>
+                                <option value="twohanded sword">twohanded sword</option>
+                                <option value="axe">axe</option>
+                                <option value="battle axe">battle axe</option>
+                                <option value="two handed axe">two handed axe</option>
+                                <option value="spear">spear</option>
+                                <option value="club">club</option>
+                                <option value="twohanded handed club">twohanded handed club</option>
+                                <option value="halebard">halebard</option>
+                                <option value="whip">whip</option>
+                                <option value="staff">staff</option>
+                                <option value="singing sticks">singing sticks</option>
+                                <option value="war hammer">war hammer</option>
+                                <option value="maul">maul</option>
+                                <option value="chatkcha">chatkcha</option>
+                                <option value="gythka">gythka</option>
+                                <option value="shield">shield</option> 
+                        </select>
+                        <input type="text" id="weaponSecondaryOther1" style="display : none;"> 
+                        
+                        Material: <select id="weaponSecondaryMaterial1" name="weaponSecondaryMaterial1" onclick="showOtherOption('1', 'weaponSecondaryMaterialOther')">
+                                <option value="stone" selected>stone</option>
+                                <option value="bone">bone</option>
+                                <option value="wood">wood</option>
+                                <option value="Other">Other</option>
+                                <option value="obsidian">obsidian</option>
+                                <option value="bronze" selected>bronze</option>
+                                <option value="iron">iron</option>
+                                <option value="steel">steel</option>
+                                <option value="chitin">chitin</option>
+                                <option value="wicker">wicker</option>
+                                <option value="lizard scales">lizard scales</option>
+                                <option value="leather">leather</option>
+                        </select>
+                        <input type="text" id="weaponSecondaryMaterialOther1" style="display : none;">
+
+                        <br> HP: (more will give longer combats) <br>
+                        <select id="hitPoints1" name="hitPoints1" onclick="showOtherOption('1', 'hitPointsOther')">
+                                <option value="5">Poor (5)</option>
+                                <option value="7">Normal (7)</option>
+                                <option value="10">Good (10)</option>
+                                <option value="12" selected>Better (12)</option>
+                                <option value="15">Strong (15)</option>
+                                <option value="20">Rare (20)</option>
+                                <option value="25">Epic (25)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="hitPointsOther1" style="display : none;">
+
+                        <br> power: <br>
+                        <select id="power1" name="power1" onclick="showOtherOption('1', 'powerOther')"> 
+                                <option value="20" selected>Poor (20)</option>
+                                <option value="30">Normal (30)</option>
+                                <option value="40">Good (40)</option>
+                                <option value="50">Better (50)</option>
+                                <option value="60">Rare (60)</option>
+                                <option value="70">Epic (70)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="powerOther1" style="display : none;">
+
+                        <br> psionics: (how often the gladiator uses psionics) <br>
+                        <select id="psionics1" name="psionics1">
+                                <option value="0" selected>Never (0%)</option>
+                                <option value="1">Rare (10%)</option>
+                                <option value="3">Common (30%)</option>
+                                <option value="5">Often (60%)</option> 
+                        </select>
+
+                        <br> attack: <br>
+                        <select id="attack1" name="attack1" onclick="showOtherOption('1', 'attackOther')">
+                                <option value="5" selected>Poor (5)</option>
+                                <option value="10">Normal (10)</option>
+                                <option value="15">Good (15)</option>
+                                <option value="20">Better (20)</option>
+                                <option value="25">Rare (25)</option>
+                                <option value="30">Epic (30)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="attackOther1" style="display : none;">
+
+                        <br> defense: <br>
+                        <select id="defence1" name="defence1" onclick="showOtherOption('1', 'defenceOther')">
+                                <option value="20" selected>Poor (5)</option>
+                                <option value="30">Normal (7)</option>
+                                <option value="40">Good (10)</option>
+                                <option value="50">Better (12)</option>
+                                <option value="60">Rare (15)</option>
+                                <option value="70">Epic (20)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="defenceOther1" style="display : none;">
+                        <br>
+                </form>
+        </div>
+
+        <div class="innerWrapper">
+                <form>
+                        <h3>Gladiator 2</h3> Name: <input type="text" id="name2" value="Chacha">
+                        <br><label for="sex2">Sex:</label>
+                        <select id="sex2" name="sex2"> 
+                                <option value="Male" selected>Male</option>
+                                <option value="Female" selected>Female</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="race2">Race:</label>
+                        <select id="race2" name="race2" onclick="showOtherOption('2', 'raceOther')">
+                                <option value="Human">Human</option>
+                                <option value="Elf">Elf</option>
+                                <option value="Half elf">Half elf</option>
+                                <option value="Dwarf">Dwarf</option>
+                                <option value="Mul">Mul</option>
+                                <option value="Half giant">Half giant</option>
+                                <option value="Halfling">Halfling</option>
+                                <option value="Thri-kreen">Thri-kreen</option>
+                                <option value="Other">Other</option>
+                                <option value="Aarakocra" selected>Aarakocra</option>
+                        </select>
+                        <input type="text" id="raceOther2" style="display : none;">
+
+                        <br> Blood color: <input type="text" value="red" id="bloodColor2"><br>
+
+                        Primary weapon: <select id="weaponPrimary2" name="weaponPrimary2" onclick="showOtherOption('2', 'weaponPrimaryOther')">
+                                <option value="dagger">dagger</option>
+                                <option value="sword">sword</option>
+                                <option value="long sword">long sword</option>
+                                <option value="Other">Other</option>
+                                <option value="great sword">great sword</option>
+                                <option value="twohanded sword">twohanded sword</option>
+                                <option value="axe" selected>axe</option>
+                                <option value="battle axe">battle axe</option>
+                                <option value="two handed axe">two handed axe</option>
+                                <option value="spear">spear</option>
+                                <option value="club">club</option>
+                                <option value="twohanded handed club">twohanded handed club</option>
+                                <option value="halebard">halebard</option>
+                                <option value="whip">whip</option>
+                                <option value="staff">staff</option>
+                                <option value="singing sticks">singing sticks</option>
+                                <option value="war hammer">war hammer</option>
+                                <option value="maul">maul</option>
+                                <option value="chatkcha">chatkcha</option>
+                                <option value="gythka">gythka</option>
+                                <option value="shield">shield</option>
+                        </select>
+                        <input type="text" id="weaponPrimaryOther2" style="display : none;"> 
+                        
+                        Material: <select id="weaponPrimaryMaterial2" name="weaponPrimaryMaterial2" onclick="showOtherOption('2', 'weaponPrimaryMaterialOther')">
+                                <option value="stone">stone</option>
+                                <option value="bone" selected>bone</option>
+                                <option value="wood">wood</option>
+                                <option value="Other">Other</option>
+                                <option value="obsidian">obsidian</option>
+                                <option value="bronze">bronze</option>
+                                <option value="iron">iron</option>
+                                <option value="steel">steel</option>
+                                <option value="chitin">chitin</option>
+                                <option value="wicker">wicker</option>
+                                <option value="lizard scales">lizard scales</option>
+                                <option value="leather">leather</option>
+                        </select>
+                        <input type="text" id="weaponPrimaryMaterialOther2" style="display : none;">
+
+                        <br> Secondary weapon: <select id="weaponSecondary2" name="weaponSecondary2" onclick="showOtherOption('2', 'weaponSecondary')">
+                                <option value="dagger">dagger</option>
+                                <option value="sword">sword</option>
+                                <option value="long sword">long sword</option>
+                                <option value="Other">Other</option>
+                                <option value="great sword">great sword</option>
+                                <option value="twohanded sword">twohanded sword</option>
+                                <option value="axe">axe</option>
+                                <option value="battle axe">battle axe</option>
+                                <option value="two handed axe">two handed axe</option>
+                                <option value="spear">spear</option>
+                                <option value="club">club</option>
+                                <option value="twohanded handed club">twohanded handed club</option>
+                                <option value="halebard">halebard</option>
+                                <option value="whip">whip</option>
+                                <option value="staff">staff</option>
+                                <option value="singing sticks" selected>singing sticks</option>
+                                <option value="war hammer">war hammer</option>
+                                <option value="maul">maul</option>
+                                <option value="chatkcha">chatkcha</option>
+                                <option value="gythka">gythka</option>
+                                <option value="shield">shield</option>
+                        </select>
+                        <input type="text" id="weaponSecondaryOther2" style="display : none;"> 
+                        
+                        Material: <select id="weaponSecondaryMaterial2" name="weaponSecondaryMaterial2" onclick="showOtherOption('2', 'weaponSecondaryMaterialOther')">
+                                <option value="stone">stone</option>
+                                <option value="bone">bone</option>
+                                <option value="wood" selected>wood</option>
+                                <option value="Other">Other</option>
+                                <option value="obsidian">obsidian</option>
+                                <option value="bronze">bronze</option>
+                                <option value="iron">iron</option>
+                                <option value="steel">steel</option>
+                                <option value="chitin">chitin</option>
+                                <option value="wicker">wicker</option>
+                                <option value="lizard scales">lizard scales</option>
+                                <option value="leather">leather</option>
+                        </select>
+                        <input type="text" id="weaponSecondaryMaterialOther2" style="display : none;">
+
+                        <br> HP: (more will give longer combats) <br>
+                        <select id="hitPoints2" name="hitPoints2" onclick="showOtherOption('2', 'hitPointsOther')">
+                                <option value="5">Poor (5)</option>
+                                <option value="7">Normal (7)</option>
+                                <option value="10">Good (10)</option>
+                                <option value="12" selected>Better (12)</option>
+                                <option value="15">Strong (15)</option>
+                                <option value="20">Rare (20)</option>
+                                <option value="25">Epic (25)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="hitPointsOther2" style="display : none;">
+
+                        <br> power: <br>
+                        <select id="power2" name="power2" onclick="showOtherOption('2', 'powerOther')">
+                                <option value="20" selected>Poor (20)</option>
+                                <option value="30">Normal (30)</option>
+                                <option value="40">Good (40)</option>
+                                <option value="50">Better (50)</option>
+                                <option value="60">Rare (60)</option>
+                                <option value="70">Epic (70)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="powerOther2" style="display : none;">
+
+                        <br> psionics: (how often the gladiator uses psionics) <br>
+                        <select id="psionics2" name="psionics2">
+                                <option value="0">Never (0%)</option>
+                                <option value="1">Rare (10%)</option>
+                                <option value="3">Common (30%)</option>
+                                <option value="5" selected>Often (60%)</option>
+                        </select>
+
+                        <br> attack: <br>
+                        <select id="attack2" name="attack2" onclick="showOtherOption('2', 'attackOther')">
+                                <option value="5" selected>Poor (5)</option>
+                                <option value="10">Normal (10)</option>
+                                <option value="15">Good (15)</option>
+                                <option value="20">Better (20)</option>
+                                <option value="25">Rare (25)</option>
+                                <option value="30">Epic (30)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="attackOther2" style="display : none;">
+
+                        <br> defense: <br>
+                        <select id="defence2" name="defence2" onclick="showOtherOption('2', 'defenceOther')">
+                                <option value="20" selected>Poor (5)</option>
+                                <option value="30">Normal (15)</option>
+                                <option value="40">Good (20)</option>
+                                <option value="50">Better (30)</option>
+                                <option value="60">Rare (35)</option>
+                                <option value="70">Epic (45)</option>
+                                <option value="Other">Other</option>
+                        </select>
+                        <input type="text" id="defenceOther2" style="display : none;">
+                        <br>
+                </form>
+        </div>
+</div>
+
+<div class="combatTextWrapper">
+
+</div>
+
+        <script type="text/javascript">
+
+                function showOtherOption(oneTwo, inputId) {
+                        
+                        if (document.getElementById(inputId + oneTwo).value === "Other") {
+                                document.getElementById(inputId + oneTwo).style.display = ""; 
+                        } else {
+                                document.getElementById(inputId + oneTwo).style.display = "none"; 
+                        }
+                }
+
+var datalistSmall = {};
+var datalistBig = {};
+var gladiatorTop = 0;
+var gladiatorBottom = 1;
+var lastCombat = 
+        {
+                "damageCrit" : 0,
+                "powerRoll" : 0,
+                "powerLevel" : 0,
+                "damage" : 0,
+                "damageCrit" : 0,
+                "attack" : 0,
+                "attacktype" : "",
+                "defencestype" : "",
+                "hit" : ""
+        }; 
+var combatRound = 0;
+var temp = [];
+var gladiators = [
+        {
+                name : "Janella",
+                pronoun1 : "she",
+                pronoun2 : "her",
+                pronoun3 : "hers",
+                race : "half elf",
+                bloodColor: "red",
+                primaryWeapon : "axe",
+                primaryWeaponMaterial : "bone",
+                secondaryWeapon : "shield", 
+                secondaryWeaponMaterial : "wicker",
+                HP : 25,
+                HPTotal : 25,
+                power : 20,
+                originalPower : 20,
+                attack : 25,
+                defence : 5,
+                psionics : 0,
+                sex : "female"
+        },
+                {
+                name : "Inah",
+                pronoun1 : "she",
+                pronoun2 : "her",
+                pronoun3 : "hers",
+                race : "human",
+                bloodColor: "red",
+                primaryWeapon : "sword",
+                primaryWeaponMaterial : "bone",
+                secondaryWeapon : "dagger", 
+                secondaryWeaponMaterial : "obsidian",
+                HP : 25,
+                HPTotal : 25,
+                power : 80,
+                originalPower : 80,
+                attack : 25,
+                defence : 5,
+                psionics : 6,
+                sex : "female"
+        }
+];
+
+
+function showHide(classShowHide, buttonId, nameString) {
+        var tempStyle = document.getElementsByClassName(classShowHide);
+        var tempString = tempStyle[0].getAttribute("style");
+
+        if (tempString.includes("none") == true) {
+                for (var i = 0; i < tempStyle.length; i++) {
+                        tempStyle[i].style.display = "";
+                        buttonId.value = "Show " + nameString;
+                }
+        } else {
+                for (var i = 0; i < tempStyle.length; i++) {
+                        tempStyle[i].style.display = "none";
+                        buttonId.value = "Hide " + nameString;
+                }
+        }
+}
+
+function setGladiators() { 
+
+        document.getElementById("outerWrapper").style.display = "none";   
+        document.getElementById("setGladiators").style.display = "none";
+
+
+        for (var i = 0; i < 2; i++) {
+                gladiators[i].name = document.getElementById("name" + (i + 1)).value;
+
+                if (document.getElementById("sex" + (i + 1)).value == "Male") {
+                        gladiators[i].pronoun1 = "he";
+                        gladiators[i].pronoun2 = "him";
+                        gladiators[i].pronoun3 = "his";
+                } else if (document.getElementById("sex" + (i + 1)).value == "Female") {
+                        gladiators[i].pronoun1 = "she";
+                        gladiators[i].pronoun2 = "her";
+                        gladiators[i].pronoun3 = "hers";
+                }
+                gladiators[i].sex = document.getElementById("sex" + (i + 1)).value;
+                gladiators[i].race = document.getElementById("race" + (i + 1)).value;
+                gladiators[i].bloodColor= document.getElementById("bloodColor" + (i + 1)).value;;
+                gladiators[i].primaryWeapon = document.getElementById("weaponPrimary" + (i + 1)).value;
+                gladiators[i].primaryWeaponMaterial = document.getElementById("weaponPrimaryMaterial" + (i + 1)).value;
+                gladiators[i].secondaryWeapon = document.getElementById("weaponSecondary" + (i + 1)).value;
+                gladiators[i].secondaryWeaponMaterial = document.getElementById("weaponSecondaryMaterial" + (i + 1)).value;
+                gladiators[i].HP = document.getElementById("hitPoints" + (i + 1)).value;
+                gladiators[i].HPTotal = document.getElementById("hitPoints" + (i + 1)).value;
+                gladiators[i].power = document.getElementById("power" + (i + 1)).value;
+                gladiators[i].originalPower = document.getElementById("power" + (i + 1)).value;
+                gladiators[i].attack = document.getElementById("attack" + (i + 1)).value;
+                gladiators[i].defence = document.getElementById("defence" + (i + 1)).value;
+                gladiators[i].psionics = document.getElementById("psionics" + (i + 1)).value;
+
+                console.log(gladiators);
+        }
+
+   
+}
+
+
+function setLastCombat() {
+        lastCombat = 
+        {
+                "damageCrit" : 0,
+                "powerRoll" : 0,
+                "powerLevel" : 0,
+                "damage" : 0,
+                "damageCrit" : 0,
+                "attack" : 0,
+                "attacktype" : "",
+                "defencestype" : "",
+                "hit" : ""
+        }; 
+}
+
+function generateFight() {
+
+        document.getElementById("nerdyStuff").style.display = "";
+        document.getElementById("tempWinner").style.display = "";
+        document.getElementById("appendStats").style.display = "";
+        document.getElementById("setGladiators").style.display = "none";
+        document.getElementById("outerWrapper").style.display = "none"; fightBegin
+        document.getElementById("fightBegin").style.display = "none";
+
+        var totalPower = gladiators[0].power + gladiators[1].power;
+
+        document.getElementById("appendHere").innerHTML += `<li>\n
+                        <div class="appendInnerWrapper">\n
+                                <div style="display: ">${gladiators[0].name}, a ${gladiators[0].sex} ${gladiators[0].race}, armed with a ${gladiators[0].primaryWeaponMaterial} ${gladiators[0].primaryWeapon} and a ${gladiators[0].secondaryWeaponMaterial} ${gladiators[0].secondaryWeapon}, enters the scorching sand of the arena under the Dark Sun of Athas.
+                                        Opposed to ${gladiators[0].pronoun2} the ${gladiators[1].sex} ${gladiators[1].race} ${gladiators[1].name}, armed with a ${gladiators[1].primaryWeaponMaterial} ${gladiators[1].primaryWeapon} and a ${gladiators[1].secondaryWeaponMaterial} ${gladiators[1].secondaryWeapon}, enters ready for the fight!</div><br>\n
+                                <div class="nerdyStuff" style="display: none">\n
+                                Nerdy stuff:<br><br>\n
+                                Powerlevels:<br>\n
+                                        ${gladiators[gladiatorTop].name}: ${gladiators[gladiatorTop].power}/${gladiators[gladiatorTop].originalPower} <br>\n
+                                        ${gladiators[gladiatorBottom].name}: ${gladiators[gladiatorBottom].power}/${gladiators[gladiatorBottom].originalPower} <br>\n
+                                </div>\n
+                                <div class="appendStats" style="display: none">
+                                ${gladiators[gladiatorTop].name}\n
+                                        HP: ${gladiators[gladiatorTop].HP}/${gladiators[gladiatorTop].HPTotal}<br>\n
+                                        Power: ${gladiators[gladiatorTop].power}/${gladiators[gladiatorTop].originalPower}<br>\n
+                                        <div class="powerTracker" style="width: ${gladiators[0].power}px; background-color: blue;"></div>\n
+                                ${gladiators[gladiatorBottom].name}\n
+                                        HP: ${gladiators[gladiatorBottom].HP}/${gladiators[gladiatorBottom].HPTotal}<br>\n
+                                        Power: ${gladiators[gladiatorBottom].power}/${gladiators[gladiatorBottom].originalPower}<br>\n
+                                        <div class="powerTracker" style="width: ${gladiators[1].power}px; background-color: red;"></div><br><br>\n
+                        \n
+                        </div>\n
+                        </div>
+                </li>`;
+
+                
+        do {
+                var powerRoll = Math.floor(Math.random() * totalPower);
+                setSmallValues();
+                setBigValues();
+                setLastCombat();
+
+                lastCombat.powerRoll = powerRoll;
+
+                if (powerRoll < gladiators[0].power) {
+
+                        gladiatorTop = 0;
+                        gladiatorBottom = 1;
+
+                } else {
+
+                        gladiatorTop = 1;
+                        gladiatorBottom = 0;
+
+                }
+
+                setPowerLevels();
+
+                var dodgeRoll = Math.floor(Math.random() * 100);
+                var combatAttackRoll = Math.floor(Math.random() * 15);
+                var psionicsRoll = Math.ceil(Math.random() * 10);
+
+                if (combatAttackRoll < 11) {
+
+                        if (dodgeRoll > (40 + gladiators[gladiatorTop].attack - gladiators[gladiatorBottom].defence)) { //defence
+                                appendCombatPart("defence");
+                                
+                                if (psionicsRoll <= returnCharacterValue(gladiatorTop, "Psionics")) { //psionic defence
+                                        appendCombatPart("defencePsionics");
+                                }
+                        } 
+
+                        else if (combatAttackRoll <= returnCharacterValue(gladiatorTop, "Psionics")) { //Psionics
+                                appendCombatPart("psionics");
+                                lastCombat.attacktype = "Psionic";
+
+                        } else if (combatAttackRoll >= 8 && combatAttackRoll <= 10) { //Racial
+                                dealDamage("normal");
+                                dealDamage("normal");
+                                appendCombatPart("attackRacial");
+
+                        } else if (combatAttackRoll == 11 || combatAttackRoll == 12) { //Critical
+                                dealDamage("crit");
+                                dealDamage("normal");
+                                appendCombatPart("critical");
+                                lastCombat.attacktype = "Critical"; 
+        
+                        } else if (combatAttackRoll > 13) { //Special event
+
+                                appendCombatPart("special")
+        
+                        } else {
+                                dealDamage("normal");
+                                appendCombatPart("attack");  
+        
+                        }
+                };
+
+                combatRound++;
+
+
+        } 
+        while (gladiators[0].HP > 0 && gladiators[1].HP > 0);
+
+        if (gladiators[0].HP < 0) {
+                console.log("finisher");
+                gladiatorTop = 1;
+                gladiatorBottom = 0;
+                appendCombatPart("finisher");
+
+        } else if (gladiators[1].HP < 0) {
+                console.log("finisher");
+                appendCombatPart("finisher");
+                gladiatorTop = 0;
+                gladiatorBottom = 1;
+        }
+
+
+};
+
+function appendCombatPart(type) {
+
+                var tempPart = "";
+
+                if (type == "defence") {
+
+                        var tempRace = "";
+                        var list = "";
+
+                        var tempCombatRoll = Math.ceil(Math.random() * 10);
+
+                        if (gladiators[gladiatorBottom].race == "Thri-kreen") {
+                                list = "defencesThrikreen";
+                                lastCombat.defencestype = "Thri-kreen";
+                        } else if (gladiators[gladiatorBottom].race == "Half giant") {
+                                list = "defencesHalfGiant";
+                                lastCombat.defencestype = "Half Giant";
+                        } else if (gladiators[gladiatorBottom].race == "Aarakocra") {
+                                list = "defencesAarakocra";
+                                lastCombat.defencestype = "Aarakocra";
+                        }
+
+                        if (tempCombatRoll <= gladiators[gladiatorBottom].Psionics) {
+                                list = "defencesPsionics";
+                                lastCombat.defencestype = "Psionics";
+                        } else {
+                                list = "defences";
+                                lastCombat.defencestype = "Normal";
+                        }
+                        
+                        var listLength = datalistBig[list].length;
+
+                        tempPart = `                        
+                        <div class="attack">${returnBigValue("attack")}.</div>\n
+                        <div class="hit">${datalistBig[list][Math.floor(Math.random() * listLength)]}.</div>`;
+                        ;
+
+                        lastCombat.finisherRoll = tempCombatRoll; 
+
+                } else if (type == "attack") { //Normal armed attack
+
+                        tempPart = `                        
+                        <div class="attack">${returnBigValue("attack")}.</div>\n
+                        <div class="hit">${returnBigValue("theHit")}.</div>`;
+
+                } else if (type == "critical") { //Critical
+                        tempPart = `                  
+                        <div class="attack">${returnBigValue("attackCritical")}.</div>\n
+                        <div class="hit">${returnBigValue("theHit")}.</div>`;
+
+                } else if (type == "psionicsAttack") { // Psionic attacks
+                        tempPart = `
+                        <div class="attack">${returnBigValue("attackPsionics")}.</div>\n 
+                        <div class="hit">${returnBigValue("theHit")}.</div>`;
+
+                } else if (type == "special") { // Special events
+                        tempPart = `
+                        <div class="attack">${returnBigValue("specials")}.</div>`;
+
+                } else if (type == "attackRacial") { // Racial attacks
+
+                        if (gladiators[gladiatorTop].race == "Thri-kreen") {
+                                tempRace = "Thrikreen";
+                                lastCombat.attachtype = "Thri-kreen";
+                        } else if (gladiators[gladiatorTop].race == "Half giant") {
+                                tempRace = "HalfGiant";
+                                lastCombat.attachtype = "Half giant";
+                        } else if (gladiators[gladiatorTop].race == "Aarakocra") {
+                                tempRace = "Aarakocra";
+                                lastCombat.attachtype = "Aarakocra";
+                        } else {
+                                tempRace = "";
+                        }
+
+                        tempPart = `
+                        <div class="attack">${returnBigValue("attack" + tempRace)}.</div>\n 
+                        <div class="hit">${returnBigValue("theHit")}.</div>`;
+
+                } else if (type == "psionicsDefence") {
+                        tempPart = `
+                        <div class="attack">${returnBigValue("attack" + tempRace)}.</div>\n 
+                        <div class="attack">${returnBigValue("defencesPsionics")}.</div>`;
+
+                } else if (type == "finisher") {
+                        
+                        var list = "";
+                        var tempCombatRoll = Math.ceil(Math.random() * 10);
+
+                        if (tempCombatRoll <= returnCharacterValue(gladiatorTop, "Psionics")) {
+                                list = "finisherPsionics";
+                        } else {
+                                list = "finisher";
+                        }
+                        
+                        var listLength = datalistBig[list].length;
+
+                        lastCombat.finisherRoll = tempCombatRoll; 
+
+                        lastCombat[list + "type"] = "Psionic " + list;
+
+                        tempPart = `                        
+                        <div class="finisher">The audience cheers as they await ${returnCharacterValue(gladiatorTop, "name")}'s' signature finishing move, that ${returnCharacterValue(gladiatorTop, "pronoun1")} always does to ${returnCharacterValue(gladiatorTop, "pronoun1")} opponent when winning a fight. ${datalistBig[list][Math.floor(Math.random() * listLength)]}.</div> \n`;
+
+                        removeDoubles();
+
+                };
+
+                document.getElementById("appendHere").innerHTML += ` 
+                <li>\n
+                        <div class="appendInnerWrapper">\n
+                                ${tempPart} \n
+                                <div class="tempWinner" style="display: none">The fight is going in ${gladiators[gladiatorTop].name}'s direction.</div><br>\n
+                                <div class="nerdyStuff" style="display: none">\n
+                                Nerdy stuff:<br><br>\n
+                                Powerlevels:<br>\n
+                                        ${gladiators[gladiatorTop].name}: ${gladiators[gladiatorTop].power}/${gladiators[gladiatorTop].originalPower} <br>\n
+                                        ${gladiators[gladiatorBottom].name}: ${gladiators[gladiatorBottom].power}/${gladiators[gladiatorBottom].originalPower} <br>\n
+                                        Power Roll: ${lastCombat.powerRoll}<br>\n
+                                        Change: ${lastCombat.powerLevel}<br>\n
+                                        Attack Roll: ${lastCombat.attack}<br>\n
+                                        Damage: ${lastCombat.damage}<br>\n
+                                        ${lastCombat.damageCrit =! 0 ? "Critical: " + lastCombat.damageCrit + "<br>" : ""}\n
+                                        ${type === "attack" ? "Attack type: " + lastCombat.attacktype + "<br>" : ""}\n
+                                        ${type === "defence" ? "Defence type: " + lastCombat.defencestype + "<br>" : ""}\n
+
+                                </div>\n
+                                <div class="appendStats" style="display: none">
+                                ${gladiators[gladiatorTop].name}\n
+                                        HP: ${gladiators[gladiatorTop].HP}/${gladiators[gladiatorTop].HPTotal}<br>\n
+                                        Power: ${gladiators[gladiatorTop].power}/${gladiators[gladiatorTop].originalPower}<br>\n
+                                        <div class="powerTracker" style="width: ${gladiators[0].power}px; background-color: blue;"></div>\n
+                                ${gladiators[gladiatorBottom].name}\n
+                                        HP: ${gladiators[gladiatorBottom].HP}/${gladiators[gladiatorBottom].HPTotal}<br>\n
+                                        Power: ${gladiators[gladiatorBottom].power}/${gladiators[gladiatorBottom].originalPower}<br>\n
+                                        <div class="powerTracker" style="width: ${gladiators[1].power}px; background-color: red;"></div><br><br>\n
+                        \n
+                        </div>\n
+                        </div>
+                </li>` 
+
+};
+
+function removeDoubles() {
+        var tempString = document.getElementById("appendHere").innerHTML;
+
+        tempString = tempString.replace(/  +/g, ' ');
+
+        document.getElementById("appendHere").innerHTML = tempString;
+};
+
+function appendFinisher() {
+        setSmallValues();
+        setBigValues();
+        
+        var list = "";
+        var tempCombatRoll = Math.ceil(Math.random() * 10);
+
+        if (tempCombatRoll <= returnCharacterValue(gladiatorTop, "Psionics")) {
+                list = "finisherPsionics";
+        } else {
+                list = "finisher";
+        }
+        
+        var listLength = datalistBig[list].length;
+
+        lastCombat.finisherRoll = tempCombatRoll; 
+
+                lastCombat[list + "type"] = list;
+
+                document.getElementById("appendHere").innerHTML += `<li>\n
+                        <div class="appendInnerWrapper">\n
+                                <div class="finisher">As ${gladiators[gladiatorTop].name} is victorious the audience eagerly awaits ${gladiators[gladiatorTop].name}s iconic finishing move. ${datalistBig[list][Math.floor(Math.random() * listLength)]}. The audience goes wild!</div>\n\n
+                                <div class="tempWinner" style="display: ">The fight is going in ${gladiators[gladiatorTop].name}'s name direction</div><br>\n
+                                <div class="nerdyStuff" style="display: ">\n
+                        Nerdy stuff:<br><br>\n
+                                Powerlevels:<br>\n
+                                ${gladiators[gladiatorTop].name}: ${gladiators[gladiatorTop].power}/${gladiators[gladiatorTop].originalPower} <br>\n
+                                ${gladiators[gladiatorBottom].name}: ${gladiators[gladiatorBottom].power}/${gladiators[gladiatorBottom].originalPower} <br>\n
+                                Power Roll: ${lastCombat.powerRoll}<br>\n
+                                Change: ${lastCombat.powerLevel}<br>\n
+                                AttackRoll: ${lastCombat.attack}<br>\n
+                                Damage: ${lastCombat.damage}<br>\n
+                                Critical: ${lastCombat.damageCrit}<br>\n
+                                Attack type: ${temp[0]}/${lastCombat.attackType}<br>\n
+                                Defence type: ${temp[1]}/${lastCombat.defenceType}<br>\n
+                                </div>\n
+                        <div class="appendStats" style="display: ">
+                                ${gladiators[gladiatorTop].name}\n
+                                        HP: ${gladiators[gladiatorTop].HP}/${gladiators[gladiatorTop].HPTotal}<br>\n
+                                        Power: ${gladiators[gladiatorTop].power}/${gladiators[gladiatorTop].originalPower}<br>\n
+                                        <div class="powerTracker" style="width: ${gladiators[0].power}px; background-color: blue;"></div>\n
+                                ${gladiators[gladiatorBottom].name}\n
+                                        HP: ${gladiators[gladiatorBottom].HP}/${gladiators[gladiatorBottom].HPTotal}<br>\n
+                                        Power: ${gladiators[gladiatorBottom].power}/${gladiators[gladiatorBottom].originalPower}<br>\n
+                                        <div class="powerTracker" style="width: ${gladiators[1].power}px; background-color: red;"></div><br><br>\n
+                        \n
+                        </div>\n
+                        </div>
+                </li>` 
+
+};
+
+function dealDamage(type) {
+        var tempRoll = Math.ceil(Math.random() * 3);
+
+        gladiators[gladiatorBottom].HP -= tempRoll;
+
+        if (type == "normal") {
+                lastCombat.damage = tempRoll;
+
+        } else {
+                lastCombat.damageCrit = tempRoll;
+        }
+};
+
+function returnSmallValue(list) { //Return a value from datalistSmall 
+        var listLength = datalistSmall[list].length;
+
+        return datalistSmall[list][Math.floor(Math.random() * listLength)];
+};
+
+function returnBigValue(list) { //Return a value from datalistBig
+        var listLength = datalistBig[list].length;
+
+        return datalistBig[list][Math.floor(Math.random() * listLength)];
+ 
+};
+
+function setPowerLevels() {
+
+        var powerChange = Math.ceil(Math.random() * 5);
+
+        lastCombat.powerLevel = powerChange;
+
+        gladiators[gladiatorTop].power += powerChange;
+        gladiators[gladiatorBottom].power -= powerChange;
+
+        if (gladiators[gladiatorTop].power > gladiators[0].originalPower + gladiators[1].originalPower) {
+                gladiators[gladiatorTop].power = gladiators[0].originalPower + gladiators[1].originalPower;
+        }
+
+        if (gladiators[gladiatorBottom].power < 0) {
+                gladiators[gladiatorBottom].power = 0;
+        } 
+};
+
+function returnCharacterValue(topBottom, value) {
+
+        if (value == "primaryWeapon") {
+                var tempRandom = Math.ceil(Math.random() * 10);
+
+                if (tempRandom > 8) {
+                        return `${gladiators[topBottom].primaryWeaponMaterial} ${gladiators[topBottom][value]}`;
+                } else {
+                        return gladiators[topBottom][value];
+                }
+        } else if (value == "secondaryWeapon") {
+                var tempRandom = Math.ceil(Math.random() * 10);
+
+                if (tempRandom > 8) {
+                        return `${gladiators[topBottom].secondaryWeaponMaterial} ${gladiators[topBottom][value]}`;
+                } else {
+                        return gladiators[topBottom][value];
+                }
+        } else {
+                return gladiators[topBottom][value];
+        }
+
+        
+};
+
+function setSmallValues() {
+
+        datalistSmall.armedAttack = ["jap", "stab", "slash", "slice", "hit", "thrust", "lunge", "clash", "whack", "strike", "smack", "pummel", "cleave", "hack"];
+
+        datalistSmall.wound = ["mark", "bruise", "wound", "slit", "fleshwound", "broken bone", "welt", "scrape", "tear", "gash", "laceration", "puncture", "cut", "abrasion", "contusion", "fracture", "dislocation", "hemorrhage", "slash", "rupture", "strain"]
+
+        datalistSmall.bodyPart = ["toe", "foot", "knee", "forearm", "upper", "arm", "hip", "stomach", "chest", "shoulder", "elbow", "hands", "finger", "wrist", "skin", "tigh", "angle", "back", "eye", "nose", "lip", "ear", "jaw", "forehead", "cheeck", "chin", "backhead", "eyebrow", "teeth", "leg", "torso", "neck", "head", "arm", "midsection", "palm", "lower back", "back of the neck", "knuckles", "collarbone", "groin", "shin", "calf"];
+
+        datalistSmall.facePart = ["cheek", "forehead", "mouth", "lips", "eyes", "ears", "neck"],
+
+        datalistSmall.bloodAmount = ["drop", "gush", "stream", "a few drop", "a droplet", "spray", "spurt", "flow", "torrent", "cascade", "dribble", "trickle", "rivulet", "splotch", "spatter", "jet", "ooze", "thin line"];
+
+        datalistSmall.elements = ["blood", "sand", "fire", "water", "air", "lava"];
+
+        datalistSmall.description = [" clumsily", " elegant ", " violent ", " strong ", " weak ", " forceful ", " angrily ", " brutal ", " swift ", " ferocious ", " precise ", " perfect ", " imperfect ", " thunderous ", " devastating ", " spinning ", " calculated ", " lightning-fast ", " graceful ", " savage ", " resounding ", " fierce ", " powerful ", " bone-crushing ", " relentless ", " impactful ", " vicious ", " well aimed", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+
+        datalistSmall.bloodHit = [`the arena`, `the arena sand`, `the arena walls`, `the audience`, `the audience, who goes wild`, `${returnCharacterValue(gladiatorTop, "name")}`, `${returnCharacterValue(gladiatorTop, "name")}'s face $ {returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")}'s armour`, `${returnCharacterValue(gladiatorTop, "name")}'s boots`, `${returnCharacterValue(gladiatorTop, "name")}'s shield $ {returnSmallValue("secondaryWeapon")}`, `${returnCharacterValue(gladiatorTop, "name")}'s sword $ {returnSmallValue("primaryWeapon")}`];
+
+        datalistSmall.curses = ["hampster", "elderberries"],
+
+        datalistSmall.sweatBlood = ["sweat", "blood"],
+
+        datalistSmall.bloodRunning = ["trickle", "stream"]
+};
+
+
+function setBigValues() { 
+        datalistBig.attack = [`${returnCharacterValue(gladiatorTop, "name")} makes a ${returnSmallValue("description")}${returnSmallValue("armedAttack")} on ${returnCharacterValue(gladiatorBottom, "name")}.`, `${returnCharacterValue(gladiatorTop, "name")} jumps forward and makes a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} charges ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} lunges towards ${returnCharacterValue(gladiatorBottom, "name")}`, `With blinding speed ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")} strikes ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} unleashes a ${returnSmallValue("description")} strike against ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")}, aiming for ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorTop, "pronoun2")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} forward, aiming for ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} delivers a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}, aiming to incapacitate ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} slashes at ${returnCharacterValue(gladiatorBottom, "name")} with ${returnSmallValue("description")} and ${returnSmallValue("description")}REMOVE`, `${returnCharacterValue(gladiatorTop, "name")} executes a ${returnSmallValue("description")} and ${returnSmallValue("description")}${returnSmallValue("armedAttack")}, catching ${returnCharacterValue(gladiatorBottom, "name")} off guard`, `${returnCharacterValue(gladiatorTop, "name")} maneuvers around ${returnCharacterValue(gladiatorBottom, "name")}'s defenses and ${returnSmallValue("description")}${returnSmallValue("armedAttack")}s with a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} feints an ${returnSmallValue("armedAttack")}, then quickly changes direction to ${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} employs a combination of speed and strength to ${returnSmallValue("description")}${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} feigns a low ${returnSmallValue("armedAttack")}, then swiftly aims a kick at ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} sidesteps ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("armedAttack")} and counters with a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} hurls a throwing knife towards ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} grabs a nearby weapon and hurls it at ${returnCharacterValue(gladiatorBottom, "name")}, aiming for ${returnCharacterValue(gladiatorBottom, "pronoun3")} ${returnSmallValue("bodyPart")}`];
+
+        datalistBig.attackCritical = [`${returnCharacterValue(gladiatorTop, "name")} launches a flurry of ${returnSmallValue("description")}attacks, overwhelming ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} to ${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}, stunning ${returnCharacterValue(gladiatorBottom, "pronoun2")} `, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "secondaryWeapon")} to ${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}, momentarily stunning them`, `${returnCharacterValue(gladiatorTop, "name")} performs a ${returnSmallValue("description")} series of ${returnSmallValue("armedAttack")}s and ${returnSmallValue("armedAttack")}s, overwhelming ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} makes a ${returnSmallValue("description")} leap, overwhelming ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")}s ${returnSmallValue("description")}${returnSmallValue("armedAttack")} rips the weapon from ${returnCharacterValue(gladiatorBottom, "name")}. ${returnCharacterValue(gladiatorTop, "name")} laughs as ${returnCharacterValue(gladiatorBottom, "name")} scrambles for it.`];
+
+        datalistBig.attackUnarmed = [`${returnCharacterValue(gladiatorTop, "name")} performs a ${returnSmallValue("description")} jump kick, aiming to knock ${returnCharacterValue(gladiatorBottom, "name")} off balance`, `${returnCharacterValue(gladiatorTop, "name")} locks ${returnCharacterValue(gladiatorBottom, "name")}'s arm and executes a joint-dislocating maneuver`, `${returnCharacterValue(gladiatorTop, "name")} sweeps ${returnCharacterValue(gladiatorBottom, "name")}'s legs, causing ${returnCharacterValue(gladiatorBottom, "pronoun2")} to stumble and fall`, `${returnCharacterValue(gladiatorTop, "name")} spins and delivers a ${returnSmallValue("description")} backhand strike to ${returnCharacterValue(gladiatorBottom, "name")}'s face`, `${returnCharacterValue(gladiatorTop, "name")} delivers a ${returnSmallValue("description")} jab followed by a powerful roundhouse kick to ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} ducks under ${returnCharacterValue(gladiatorBottom, "name")}'s punch and swiftly executes a hip toss, sending ${returnCharacterValue(gladiatorBottom, "pronoun2")} crashing to the ground`, `${returnCharacterValue(gladiatorTop, "name")} catches ${returnCharacterValue(gladiatorBottom, "name")}'s leg mid-kick and counters with a sweeping leg takedown`, `${returnCharacterValue(gladiatorTop, "name")} locks ${returnCharacterValue(gladiatorBottom, "name")} in a tight headlock, applying pressure to cut off ${returnCharacterValue(gladiatorBottom, "pronoun3")} oxygen supply`, `${returnCharacterValue(gladiatorTop, "name")} unleashes a barrage of rapid-fire punches and kicks, overwhelming ${returnCharacterValue(gladiatorBottom, "name")}'s defenses`, `${returnCharacterValue(gladiatorTop, "name")} grabs ${returnCharacterValue(gladiatorBottom, "name")}'s arm and executes a textbook armbar, putting immense pressure on ${returnCharacterValue(gladiatorBottom, "pronoun3")} elbow joint`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} superior grappling skills to take ${returnCharacterValue(gladiatorBottom, "name")} down to the ground and secures a dominant position`, `${returnCharacterValue(gladiatorTop, "name")} delivers a devastating headbutt, stunning ${returnCharacterValue(gladiatorBottom, "name")} and leaving ${returnCharacterValue(gladiatorBottom, "pronoun2")} disoriented`, `${returnCharacterValue(gladiatorTop, "name")} performs a lightning-fast spinning backfist, catching ${returnCharacterValue(gladiatorBottom, "name")} off guard and sending ${returnCharacterValue(gladiatorBottom, "pronoun2")} reeling`, `${returnCharacterValue(gladiatorTop, "name")} executes a perfectly timed flying knee strike, connecting with ${returnCharacterValue(gladiatorBottom, "name")}'s chest and knocking the wind out of ${returnCharacterValue(gladiatorBottom, "pronoun2")}`];
+
+        datalistBig.attackPsionics = [`${returnCharacterValue(gladiatorTop, "name")} focuses ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic energy and unleashes a telekinetic blast, sending ${returnCharacterValue(gladiatorBottom, "name")} flying backward.`, `${returnCharacterValue(gladiatorTop, "name")} delves into the depths of ${returnCharacterValue(gladiatorBottom, "pronoun3")} mind, projecting a powerful psionic wave that disrupts ${returnCharacterValue(gladiatorBottom, "name")}'s thoughts, causing confusion and disorientation.`, `${returnCharacterValue(gladiatorTop, "name")} creates an ethereal psionic blade and slashes through ${returnCharacterValue(gladiatorBottom, "name")}'s defenses, leaving behind a trail of searing energy on the ${returnSmallValue("bodyPart")}.`, `${returnCharacterValue(gladiatorTop, "name")} taps into ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic abilities, creating a psychic shield that repels ${returnCharacterValue(gladiatorBottom, "name")}'s attacks and renders ${returnCharacterValue(gladiatorBottom, "pronoun2")} temporarily defenseless.`, `${returnCharacterValue(gladiatorTop, "name")} channels ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic energy into a devastating mental assault, causing intense pain and psychic anguish in ${returnCharacterValue(gladiatorBottom, "name")}'s mind.`, `${returnCharacterValue(gladiatorTop, "name")} manifests a psionic force field around ${returnCharacterValue(gladiatorTop, "pronoun2")}selves, deflecting ${returnCharacterValue(gladiatorBottom, "name")}'s strikes and rendering ${returnCharacterValue(gladiatorBottom, "pronoun2")} unable to land a solid blow.`, `${returnCharacterValue(gladiatorTop, "name")} projects a powerful psionic illusion, creating a mirage that confuses ${returnCharacterValue(gladiatorBottom, "name")} and causes ${returnCharacterValue(gladiatorBottom, "pronoun2")} to attack out of thin air.`, `${returnCharacterValue(gladiatorTop, "name")} taps into the primal forces of the mind, using ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic powers to manipulate the elements and unleash a torrent of illusions of ${returnSmallValue("elements")} upon ${returnCharacterValue(gladiatorBottom, "name")}.`, `${returnCharacterValue(gladiatorTop, "name")} reaches out with ${returnCharacterValue(gladiatorTop, "pronoun3")} mind and seizes control of ${returnCharacterValue(gladiatorBottom, "name")}'s body, forcing them to move against ${returnCharacterValue(gladiatorBottom, "pronoun3")} will and leaving ${returnCharacterValue(gladiatorBottom, "pronoun2")} vulnerable toattacks.`, `${returnCharacterValue(gladiatorTop, "name")} taps into the collective consciousness of ${returnCharacterValue(gladiatorTop, "pronoun3")} allies, bolstering ${returnCharacterValue(gladiatorTop, "pronoun3")} strength and speed with a of psionic energy, giving ${returnCharacterValue(gladiatorTop, "pronoun2")} an advantage over ${returnCharacterValue(gladiatorBottom, "name")}.`, `${returnCharacterValue(gladiatorTop, "name")} focuses psionic energy into a concentrated beam of pure mental force, piercing through ${returnCharacterValue(gladiatorBottom, "name")}'s defenses and causing intense pain.`, `${returnCharacterValue(gladiatorTop, "name")} taps into the psionic energy of the surrounding environment, summoning a swirling vortex of ${returnSmallValue("elements")} force that hurls ${returnCharacterValue(gladiatorBottom, "name")} into the air and slams ${returnCharacterValue(gladiatorBottom, "pronoun2")} back down.`, `${returnCharacterValue(gladiatorTop, "name")} enters a heightened state of psionic awareness, allowing ${returnCharacterValue(gladiatorTop, "pronoun2")} to predict ${returnCharacterValue(gladiatorBottom, "name")}'s movements with uncanny precision and counter ${returnCharacterValue(gladiatorBottom, "pronoun3")} attacks effortlessly.`, `${returnCharacterValue(gladiatorTop, "name")} creates a telepathic link with ${returnCharacterValue(gladiatorBottom, "name")}, delving into ${returnCharacterValue(gladiatorBottom, "pronoun3")} fears, causing ${returnCharacterValue(gladiatorBottom, "pronoun2")} to freeze in terror and leaving ${returnCharacterValue(gladiatorBottom, "pronoun2")} vulnerable onslaught of ${returnSmallValue("description")}${returnSmallValue("armedAttack")}s.`, `${returnCharacterValue(gladiatorTop, "name")} projects a psionic barrier around ${returnCharacterValue(gladiatorTop, "pronoun2")}selves, absorbing the energy of ${returnCharacterValue(gladiatorBottom, "name")}'s attacks and converting it into a surge of raw power that enhances ${returnCharacterValue(gladiatorTop, "pronoun3")} own strikes.`, `${returnCharacterValue(gladiatorTop, "name")} taps into the psionic energy of the sun itself, channel its scorching heat and blinding light into a devastating blast that engulfs ${returnCharacterValue(gladiatorBottom, "name")} in illusionary flames.`, `${returnCharacterValue(gladiatorTop, "name")} enters a state of psionic invisibility, rendering ${returnCharacterValue(gladiatorTop, "pronoun2")}selves completely undetectable to ${returnCharacterValue(gladiatorBottom, "name")}'s senses and allowing ${returnCharacterValue(gladiatorTop, "pronoun2")} to strike from the shadows with deadly precision.`, `${returnCharacterValue(gladiatorTop, "name")} manipulates the fabric of reality with ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic powers, creating a localized temporal distortion that slows down time for ${returnCharacterValue(gladiatorBottom, "name")}, giving ${returnCharacterValue(gladiatorTop, "name")} an advantage in combat.`, `${returnCharacterValue(gladiatorTop, "name")} unleashes a barrage of psionic projectiles, each one infused with the power to cause pain to ${returnCharacterValue(gladiatorBottom, "name")}.`, `${returnCharacterValue(gladiatorTop, "name")} taps into the collective psionic potential of all living beings around ${returnCharacterValue(gladiatorTop, "pronoun2")}, channeling ${returnCharacterValue(gladiatorTop, "pronoun3")} combined strength into a single devastating psionic blast that weakens ${returnCharacterValue(gladiatorBottom, "name")}'s defenses.`];
+
+        datalistBig.attackHalfGiant = [`${returnCharacterValue(gladiatorTop, "name")}, the towering half-giant, swings a massive fist at ${returnCharacterValue(gladiatorBottom, "name")}, trying to crush ${returnCharacterValue(gladiatorBottom, "pronoun1")} with sheer force`, `Relying on ${returnCharacterValue(gladiatorTop, "pronoun3")} immense strength, ${returnCharacterValue(gladiatorTop, "name")} grabs ${returnCharacterValue(gladiatorBottom, "name")} and attempts to toss ${returnCharacterValue(gladiatorBottom, "pronoun2")} across the arena`, `${returnCharacterValue(gladiatorTop, "name")} stomps the ground, causing a small quake that throws ${returnCharacterValue(gladiatorBottom, "name")} off balance`, `With a roar, ${returnCharacterValue(gladiatorTop, "name")} lifts ${returnCharacterValue(gladiatorTop, "pronoun3")} massive ${returnCharacterValue(gladiatorTop, "primaryWeapon")} and brings it down in a powerful arc, aiming for ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}`, `Despite ${returnCharacterValue(gladiatorTop, "pronoun3")} size, ${returnCharacterValue(gladiatorTop, "name")} nimbly dodges ${returnCharacterValue(gladiatorBottom, "name")}'s attack and counters with a swift punch`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} long reach to keep ${returnCharacterValue(gladiatorBottom, "name")} at bay, striking with ${returnSmallValue("description")}${returnSmallValue("armedAttack")} from a distance`, `With brute force, ${returnCharacterValue(gladiatorTop, "name")} shatters ${returnCharacterValue(gladiatorBottom, "name")}'s defense and follows up with a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} takes a moment to catch ${returnCharacterValue(gladiatorTop, "pronoun3")} breath, ${returnCharacterValue(gladiatorTop, "pronoun3")} mighty form towering over the exhausted ${returnCharacterValue(gladiatorBottom, "name")}`, `Underestimating ${returnCharacterValue(gladiatorTop, "name")}'s intelligence, ${returnCharacterValue(gladiatorBottom, "name")} is caught off-guard by a clever feint and a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `Drawing on ${returnCharacterValue(gladiatorTop, "pronoun3")} half-giant resilience, ${returnCharacterValue(gladiatorTop, "name")} endures ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")}s and retaliates with overwhelming force`, `${returnCharacterValue(gladiatorTop, "name")} takes a huge ${returnSmallValue("armedAttack")}, aiming for ${returnCharacterValue(gladiatorBottom, "name")} with all ${returnCharacterValue(gladiatorTop, "pronoun3")} might`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} weight to ${returnCharacterValue(gladiatorTop, "pronoun3")} advantage, slamming ${returnCharacterValue(gladiatorBottom, "name")} with ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")}`, `${returnCharacterValue(gladiatorTop, "name")} slams ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} down, aiming for ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} brings ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} down with a powerful swing, aiming for ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} size to ${returnCharacterValue(gladiatorTop, "pronoun3")} advantage, swinging ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} with tremendous force`, `${returnCharacterValue(gladiatorTop, "name")} charges ${returnCharacterValue(gladiatorBottom, "name")} with a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} unleashes a flurry of strikes, aiming for ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")} with unstoppable force`, `${returnCharacterValue(gladiatorTop, "name")} shows ${returnCharacterValue(gladiatorTop, "pronoun3")} strength, delivering a ${returnSmallValue("description")}${returnSmallValue("armedAttack")} to ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} height to ${returnSmallValue("description")}${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")} from top down`, `Being so much larger makes then ${returnCharacterValue(gladiatorBottom, "name")}, ${returnCharacterValue(gladiatorTop, "name")} has a big advantage when ${returnSmallValue("description")}${returnSmallValue("armedAttack")}ing.`, `With the ferocity and power of a rhinoceros ADD NEW LIST AF DANGEROUS ANIMALS, ${returnCharacterValue(gladiatorBottom, "name")} charges`];
+
+        datalistBig.attackAarakocra = [`${returnCharacterValue(gladiatorTop, "name")} swoops down from above, raking ${returnCharacterValue(gladiatorBottom, "name")} with ${returnCharacterValue(gladiatorTop, "pronoun3")} talons`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} powerful wings to create a dust storm, momentarily blinding ${returnCharacterValue(gladiatorBottom, "name")}`, `With a sudden flap of ${returnCharacterValue(gladiatorTop, "pronoun3")} wings, ${returnCharacterValue(gladiatorTop, "name")} dodges ${returnCharacterValue(gladiatorBottom, "name")}'s incoming ${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} circles overhead, scanning for an opportune moment to dive and strike ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")}'s sharp beak finds its mark, tearing into ${returnCharacterValue(gladiatorBottom, "name")}'s exposed flesh`, `${returnCharacterValue(gladiatorTop, "name")} hovers above the fray, launching a flurry of throwing daggers at ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} catches ${returnCharacterValue(gladiatorBottom, "name")} off-guard by suddenly changing ${returnSmallValue("armedAttack")} flight path and delivering a swift strike`, `With a deafening screech, ${returnCharacterValue(gladiatorTop, "name")} disorients ${returnCharacterValue(gladiatorBottom, "name")} and then swoops in for a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} takes advantage of ${returnCharacterValue(gladiatorTop, "pronoun3")} aerial prowess, using ${returnCharacterValue(gladiatorTop, "pronoun3")} wings to propel ${returnCharacterValue(gladiatorTop, "pronoun2")}self towards ${returnCharacterValue(gladiatorBottom, "name")} with incredible speed`, `${returnCharacterValue(gladiatorTop, "name")}'s wings buffet ${returnCharacterValue(gladiatorBottom, "name")}, knocking ${returnCharacterValue(gladiatorBottom, "pronoun2")} off balance and leaving ${returnCharacterValue(gladiatorBottom, "pronoun2")} vulnerable to a follow-up attack`, `${returnCharacterValue(gladiatorTop, "name")} feints with ${returnCharacterValue(gladiatorTop, "pronoun3")} talons, then delivers a ${returnSmallValue("description")}${returnSmallValue("armedAttack")} with ${returnCharacterValue(gladiatorTop, "pronoun3")} beak`, `Using the momentum from a steep dive, ${returnCharacterValue(gladiatorTop, "name")} lands a crushing blow on ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} gracefully evades ${returnCharacterValue(gladiatorBottom, "name")}'s attack by soaring into the sky and then retaliates with a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `As ${returnCharacterValue(gladiatorBottom, "name")} attempts to regain ${returnCharacterValue(gladiatorBottom, "pronoun3")} footing as ${returnCharacterValue(gladiatorTop, "name")} lands a punishing hit with ${returnCharacterValue(gladiatorTop, "pronoun3")} razor-sharp claws`, `${returnCharacterValue(gladiatorTop, "name")} expertly maneuvers through the air, avoiding ${returnCharacterValue(gladiatorBottom, "name")}'s attacks and waiting for the perfect moment to strike`, `${returnCharacterValue(gladiatorTop, "name")} soars into the air, using ${returnCharacterValue(gladiatorTop, "pronoun3")} wings to gain a tactical advantage over ${returnCharacterValue(gladiatorBottom, "name")}`, `With a powerful flap of ${returnCharacterValue(gladiatorTop, "pronoun3")} wings, ${returnCharacterValue(gladiatorTop, "name")} propels ${returnCharacterValue(gladiatorTop, "pronoun2")}self towards ${returnCharacterValue(gladiatorBottom, "name")}, lashing out with ${returnCharacterValue(gladiatorTop, "pronoun3")} razor-sharp claws`, `${returnCharacterValue(gladiatorTop, "name")} circles ${returnCharacterValue(gladiatorTop, "pronoun3")} opponent from above, before diving down and delivering a fearsome beak strike to ${returnCharacterValue(gladiatorBottom, "name")}'s exposed ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} deftly dodges ${returnCharacterValue(gladiatorBottom, "name")}'s attack and retaliates with a swift, ${returnSmallValue("description")} kick from ${returnCharacterValue(gladiatorTop, "pronoun3")} clawed feet`, `${returnCharacterValue(gladiatorTop, "name")}'s wings beat furiously as ${returnCharacterValue(gladiatorTop, "pronoun1")} hovers above the arena, taunting ${returnCharacterValue(gladiatorBottom, "name")} and waiting for the perfect moment to strike`, `In a flash of speed, ${returnCharacterValue(gladiatorTop, "name")} swoops down and rakes ${returnCharacterValue(gladiatorTop, "pronoun3")} claws across ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}, leaving deep gashes in ${returnCharacterValue(gladiatorBottom, "pronoun3")} wake`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} beak to expertly disarm ${returnCharacterValue(gladiatorBottom, "name")}, knocking the ${returnCharacterValue(gladiatorBottom, "primaryWeapon")} from ${returnCharacterValue(gladiatorBottom, "pronoun3")} grasp and leaving ${returnCharacterValue(gladiatorBottom, "pronoun2")} vulnerable`, `As ${returnCharacterValue(gladiatorBottom, "name")} attempts to recover, ${returnCharacterValue(gladiatorTop, "name")} unleashes a flurry of wing-assisted strikes, pummeling ${returnCharacterValue(gladiatorTop, "pronoun3")} opponent into submission`, `${returnCharacterValue(gladiatorTop, "name")} displays ${returnCharacterValue(gladiatorTop, "pronoun3")} aerial prowess, evading ${returnCharacterValue(gladiatorBottom, "name")}'s attacks with ease and countering with a well-aimed throwing dagger`, `With a deafening screech, ${returnCharacterValue(gladiatorTop, "name")} dives towards ${returnCharacterValue(gladiatorBottom, "name")}, talons outstretched, and delivers a ${returnSmallValue("description")}${returnSmallValue("armedAttack")} to ${returnCharacterValue(gladiatorBottom, "pronoun3")}'s ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} kicks off the ground, using ${returnCharacterValue(gladiatorTop, "pronoun3")} powerful talons to claw at ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} dives, using ${returnCharacterValue(gladiatorTop, "pronoun3")} wings to gather speed and momentum before striking ${returnCharacterValue(gladiatorBottom, "name")} with ${returnCharacterValue(gladiatorTop, "pronoun3")} beak.`, `${returnCharacterValue(gladiatorTop, "name")}'s talons find their mark, raking across ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")} as ${returnCharacterValue(gladiatorBottom, "pronoun1")} leaps away.`, `${returnCharacterValue(gladiatorTop, "name")} swoops down, using ${returnCharacterValue(gladiatorTop, "pronoun3")} beak to target ${returnCharacterValue(gladiatorBottom, "name")}'s exposed ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorBottom, "name")} cowers as ${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")} from above`, `${returnCharacterValue(gladiatorTop, "name")} flexes ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} and ${returnCharacterValue(gladiatorTop, "secondaryWeapon")} while flying.`, `${returnCharacterValue(gladiatorTop, "name")} scratches ${returnCharacterValue(gladiatorBottom, "name")} with the claws on ${returnCharacterValue(gladiatorTop, "pronoun3")} feet`, `${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")}s ${returnCharacterValue(gladiatorBottom, "name")} with a wing and makes a ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorTop, "name")} flyes up and throws a throwing dagger at ${returnCharacterValue(gladiatorBottom, "name")}, aiming for ${returnCharacterValue(gladiatorBottom, "pronoun3")} ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} send out a piercing shriek and ${returnSmallValue("description")}${returnSmallValue("armedAttack")}s ${returnCharacterValue(gladiatorBottom, "name")}`, `the sands of the arena is swept aside by the gust of wind from ${returnCharacterValue(gladiatorTop, "name")}s wings, before ${returnCharacterValue(gladiatorTop, "pronoun1")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")}s ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("description")} pecks at ${returnCharacterValue(gladiatorBottom, "name")} with ${returnCharacterValue(gladiatorTop, "pronoun3")} beak`, `${returnCharacterValue(gladiatorTop, "name")} feints an attack with ${returnCharacterValue(gladiatorTop, "pronoun3")} beak, before making a ${returnSmallValue("description")}${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}s ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} flyes up, dives down, before ${returnSmallValue("description")}ing ${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorBottom, "name")} swoops down and makes a ${returnSmallValue("description")}${returnSmallValue("armedAttack")} on ${returnCharacterValue(gladiatorBottom, "name")}`, ];
+
+        datalistBig.attackThrikreen = [`${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")} with ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")}, before slicing with two sets of claws`, `${returnCharacterValue(gladiatorTop, "name")} misses an attack, but quickly ${returnSmallValue("armedAttack")} with a claw`, `${returnCharacterValue(gladiatorTop, "name")} sends out a string of cackles, before ${returnSmallValue("description")}${returnSmallValue("armedAttack")} ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} puts away ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")}, to furiously attack with all fore claws`];
+
+        datalistBig.defences = [`${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorBottom, "primaryWeapon")} ${returnSmallValue("description")}${returnSmallValue("armedAttack")} the helpless ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorBottom, "name")} parries ${returnSmallValue("description")} with ${returnCharacterValue(gladiatorBottom, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")}`, `${returnCharacterValue(gladiatorBottom, "name")} dodges ${returnSmallValue("description")}`, `${returnCharacterValue(gladiatorBottom, "name")} jumpes away ${returnSmallValue("description")}`, `The hit is deflected by ${returnCharacterValue(gladiatorBottom, "name")}'s armour`, `${returnCharacterValue(gladiatorBottom, "name")} raises ${returnCharacterValue(gladiatorBottom, "pronoun3")} ${returnCharacterValue(gladiatorTop, "secondaryWeapon")}, blocking ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("armedAttack")} effortlessly`, `${returnCharacterValue(gladiatorBottom, "name")} sidesteps, narrowly avoiding ${returnCharacterValue(gladiatorTop, "name")}'s strike`, `With lightning reflexes ${returnCharacterValue(gladiatorBottom, "name")} ducks under ${returnCharacterValue(gladiatorTop, "name")}'s attack, leaving them off balance`, `${returnCharacterValue(gladiatorBottom, "name")} expertly parries ${returnCharacterValue(gladiatorTop, "name")}'s, sending ${returnCharacterValue(gladiatorTop, "pronoun3")} weapon off course.`, `${returnCharacterValue(gladiatorBottom, "name")} effortlessly blocks ${returnCharacterValue(gladiatorTop, "name")}'s strike with their ${returnCharacterValue(gladiatorBottom, "secondaryWeapon")}, leaving ${returnCharacterValue(gladiatorTop, "pronoun2")} unscathed`, `${returnCharacterValue(gladiatorBottom, "name")} skillfully evades ${returnCharacterValue(gladiatorTop, "name")}'s attack, leaving ${returnCharacterValue(gladiatorTop, "pronoun2")} swinging at thin air`, `${returnCharacterValue(gladiatorBottom, "name")}'s quick footwork allows ${returnCharacterValue(gladiatorBottom, "pronoun2")} to dance out of harm's way, dodging ${returnCharacterValue(gladiatorTop, "name")}'s strike.`, `${returnCharacterValue(gladiatorBottom, "name")}'s well-timed sidestep causes ${returnCharacterValue(gladiatorTop, "name")}'s weapon to past ${returnCharacterValue(gladiatorBottom, "pronoun2")}`, `${returnCharacterValue(gladiatorBottom, "name")} anticipates ${returnCharacterValue(gladiatorTop, "name")}'s attack and effortlessly counters, leaving ${returnCharacterValue(gladiatorTop, "name")} vulnerable`, `${returnCharacterValue(gladiatorBottom, "name")}'s agile movements make it seem as if they're, easily avoiding ${returnCharacterValue(gladiatorTop, "name")}'s strike`, `${returnCharacterValue(gladiatorBottom, "name")}'s precise timing allows ${returnCharacterValue(gladiatorBottom, "pronoun2")} to parry ${returnCharacterValue(gladiatorTop, "name")}'s attack easely, frustrating ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent`, `${returnCharacterValue(gladiatorBottom, "name")} swiftly ducks and rolls away, narrowly escaping ${returnCharacterValue(gladiatorTop, "name")}'s attack`, `With a graceful spin, ${returnCharacterValue(gladiatorBottom, "name")} evades ${returnCharacterValue(gladiatorTop, "name")}'s strike, leaving ${returnCharacterValue(gladiatorTop, "pronoun2")} off balance`, `${returnCharacterValue(gladiatorBottom, "name")} expertly deflects ${returnCharacterValue(gladiatorTop, "name")}'s blow with a flick of their wrist, sending the weapon flying`, `${returnCharacterValue(gladiatorBottom, "name")}'s nimble footwork allows ${returnCharacterValue(gladiatorBottom, "pronoun3")} to dance around ${returnCharacterValue(gladiatorTop, "name")}'s attack, avoiding it completely`, `${returnCharacterValue(gladiatorBottom, "name")}'s keen reflexes enable ${returnCharacterValue(gladiatorBottom, "pronoun3")} to parry ${returnCharacterValue(gladiatorTop, "name")}'s strike effortlessly, leaving ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent exposed`, `${returnCharacterValue(gladiatorBottom, "name")} effortlessly sidesteps ${returnCharacterValue(gladiatorTop, "name")}'s attack, making them swinging at thin air`, `${returnCharacterValue(gladiatorBottom, "name")}'s swift jump backward puts ${returnCharacterValue(gladiatorBottom, "pronoun2")} out of reach of ${returnCharacterValue(gladiatorTop, "name")}'s, frustrating ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent`, `${returnCharacterValue(gladiatorBottom, "name")}'s blocks with ${returnCharacterValue(gladiatorBottom, "pronoun3")} ${returnCharacterValue(gladiatorBottom, "secondaryWeapon")} nullifying ${returnCharacterValue(gladiatorTop, "name")}'s strike`, `${returnCharacterValue(gladiatorBottom, "name")} anticipates ${returnCharacterValue(gladiatorTop, "name")}'s move and gracefully dodges to the side, narrowly avoiding the attack`, `${returnCharacterValue(gladiatorBottom, "name")}'s quick reaction allows ${returnCharacterValue(gladiatorBottom, "pronoun2")} to parry ${returnCharacterValue(gladiatorTop, "name")}'s blow with precision, leaving ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent stunned`];
+
+        datalistBig.defencesPsionics = [`${returnCharacterValue(gladiatorBottom, "name")} deflects the hit with ${returnCharacterValue(gladiatorBottom, "pronouns3")} psionic powers`, `${returnCharacterValue(gladiatorBottom, "name")} uses ${returnCharacterValue(gladiatorBottom, "pronouns3")} psionic powers, blocking ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("armedAttack")} effortlessly`, `${returnCharacterValue(gladiatorBottom, "name")}'s mind becomes a shield as ${returnCharacterValue(gladiatorBottom, "pronoun1")} deflect the psionic blast with a surge of mental fortitude`, `${returnCharacterValue(gladiatorBottom, "name")} anticipates the strike with ${returnCharacterValue(gladiatorBottom, "pronoun3")} heightened psionic senses, sidestepping effortlessly and leaving ${returnCharacterValue(gladiatorTop, "name")} swinging at thin air`, `With a burst of psionic energy, ${returnCharacterValue(gladiatorBottom, "name")} propels ${returnCharacterValue(gladiatorBottom, "pronoun2")}selves backward, narrowly avoiding ${returnCharacterValue(gladiatorTop, "name")}'s deadly swing`, `The psionic gladiator's concentration falters for a moment, causing ${returnCharacterValue(gladiatorTop, "pronoun2")} attack to veer off course and miss ${returnCharacterValue(gladiatorBottom, "name")} by a hair's breadth`, `${returnCharacterValue(gladiatorBottom, "name")}'s psionic reflexes kick in, allowing ${returnCharacterValue(gladiatorBottom, "pronoun2")} to twist and turn with uncanny agility, evading ${returnCharacterValue(gladiatorTop, "name")}'s strikes with ease`, `${returnCharacterValue(gladiatorBottom, "name")}'s psionic shield shimmers into existence, absorbing the impact of ${returnCharacterValue(gladiatorTop, "name")}'s blow and leaving ${returnCharacterValue(gladiatorTop, "pronoun2")} unscathed`, `${returnCharacterValue(gladiatorBottom, "name")} taps into ${returnCharacterValue(gladiatorBottom, "pronoun3")} psionic potential, temporarily enhancing ${returnCharacterValue(gladiatorBottom, "pronoun3")} speed and agility, enabling ${returnCharacterValue(gladiatorBottom, "pronoun2")} to dodge ${returnCharacterValue(gladiatorTop, "name")}'s attacks with lightning-fast reflexes`, `${returnCharacterValue(gladiatorBottom, "name")}'s psionic aura flares up, creating a psychic barrier that repels ${returnCharacterValue(gladiatorTop, "name")}'s strike, leaving ${returnCharacterValue(gladiatorTop, "pronoun2")} momentarily stunned`, `${returnCharacterValue(gladiatorBottom, "name")}'s psionic prowess allows ${returnCharacterValue(gladiatorBottom, "pronoun2")} to anticipate ${returnCharacterValue(gladiatorTop, "name")}'s every move, effortlessly parrying and countering with precision.`, `${returnCharacterValue(gladiatorBottom, "name")} focuses ${returnCharacterValue(gladiatorBottom, "pronoun3")} psionic energy, creating a telekinetic forcefield that deflects ${returnCharacterValue(gladiatorTop, "name")}'s attack, sending ${returnCharacterValue(gladiatorTop, "pronoun2")} stumbling backward`];
+
+        datalistBig.defencesHalfGiant = [`The massive muscles of ${returnCharacterValue(gladiatorBottom, "name")} flex as ${returnCharacterValue(gladiatorBottom, "pronoun1")} effortlessly deflect ${returnCharacterValue(gladiatorTop, "name")}'s strike`, `${returnCharacterValue(gladiatorBottom, "name")}'s natural resilience allows ${returnCharacterValue(gladiatorTop, "pronoun2")} to shrug off ${returnCharacterValue(gladiatorTop, "name")}'s attack with ease`, `Using ${returnCharacterValue(gladiatorBottom, "pronoun3")} superior strength, ${returnCharacterValue(gladiatorBottom, "name")} catches ${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorTop, "primaryWeapon")} mid-swing and pushes ${returnCharacterValue(gladiatorTop, "pronoun2")} back`, `${returnCharacterValue(gladiatorBottom, "name")}'s towering stature allows ${returnCharacterValue(gladiatorBottom, "pronoun2")} to easily reach down and sweep ${returnCharacterValue(gladiatorTop, "name")}'s feet out from under ${returnCharacterValue(gladiatorTop, "pronoun2")}`, `The sheer size of ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnCharacterValue(gladiatorBottom, "secondaryWeapon")} makes it nearly impossible for ${returnCharacterValue(gladiatorTop, "name")} to land a successful blow`, `${returnCharacterValue(gladiatorBottom, "name")} relies on ${returnCharacterValue(gladiatorBottom, "pronoun3")} brute force to withstand the impact of ${returnCharacterValue(gladiatorTop, "name")}'s attack, barely feeling a thing`, `With surprising agility for someone ${returnCharacterValue(gladiatorBottom, "name")}'s size, ${returnCharacterValue(gladiatorBottom, "name")} spins away from ${returnCharacterValue(gladiatorTop, "name")}'s strike`, `Despite ${returnCharacterValue(gladiatorBottom, "pronoun3")} limited intellect, ${returnCharacterValue(gladiatorBottom, "name")}'s instincts help ${returnCharacterValue(gladiatorBottom, "pronoun2")} predict and evade ${returnCharacterValue(gladiatorTop, "name")}'s next move`, `${returnCharacterValue(gladiatorTop, "name")} underestimated ${returnCharacterValue(gladiatorBottom, "name")}'s intellect and makes a foolish misstake`, `${returnCharacterValue(gladiatorBottom, "name")}'s powerful arm muscles enable ${returnCharacterValue(gladiatorBottom, "pronoun2")} to block ${returnCharacterValue(gladiatorTop, "name")}'s attack with a resounding clang`, `The intimidating presence of ${returnCharacterValue(gladiatorBottom, "name")} causes ${returnCharacterValue(gladiatorTop, "name")} to hesitate, giving ${returnCharacterValue(gladiatorBottom, "name")} ample time to prepare ${returnCharacterValue(gladiatorBottom, "pronoun3")} defenses`, `${returnCharacterValue(gladiatorBottom, "name")}'s huge size easily absorbs the blow of ${returnCharacterValue(gladiatorTop, "name")}`, `${returnCharacterValue(gladiatorBottom, "name")} uses ${returnCharacterValue(gladiatorBottom, "pronoun3")} huge size to stay out of reach of ${returnCharacterValue(gladiatorTop, "name")}`, `The puny weapons of ${returnCharacterValue(gladiatorTop, "name")} bounces of the oversized armour of ${returnCharacterValue(gladiatorBottom, "name")}`];
+
+        datalistBig.defencesAarakocra = [`${returnCharacterValue(gladiatorTop, "name")} gracefully evades ${returnCharacterValue(gladiatorBottom, "name")}'s attack by soaring into the sky`, `${returnCharacterValue(gladiatorBottom, "name")} flaps ${returnCharacterValue(gladiatorBottom, "pronoun3")} wings to get away from ${returnCharacterValue(gladiatorTop, "name")}`, `${returnCharacterValue(gladiatorBottom, "name")} fly up and avoids ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `${returnCharacterValue(gladiatorBottom, "name")} barely dodges ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")}, with feathers flying everywhere`, `${returnCharacterValue(gladiatorBottom, "name")}'s birdlike agility comes in handy and with the flap of a wing, gets away from ${returnCharacterValue(gladiatorTop, "name")}'s`, `${returnCharacterValue(gladiatorBottom, "name")} parries the attack of ${returnCharacterValue(gladiatorTop, "name")} with the claws on ${returnCharacterValue(gladiatorBottom, "pronoun3")} feet`, `${returnCharacterValue(gladiatorBottom, "name")} quickly ascends, evading ${returnCharacterValue(gladiatorTop, "name")}'s sweeping ${returnCharacterValue(gladiatorTop, "primaryWeapon")} and retaliating with a swift peck`, `${returnCharacterValue(gladiatorBottom, "name")}'s aerial acrobatics leave ${returnCharacterValue(gladiatorTop, "name")} struggling to land a hit as feathers rain down`, `${returnCharacterValue(gladiatorBottom, "name")} soars above ${returnCharacterValue(gladiatorTop, "name")}'s outstretched ${returnCharacterValue(gladiatorTop, "primaryWeapon")} gracefully dodging the attack`, `${returnCharacterValue(gladiatorBottom, "name")} uses ${returnCharacterValue(gladiatorBottom, "pronoun3")} nimble bird-like reflexes to narrowly dodge ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")} swing`, `${returnCharacterValue(gladiatorBottom, "name")} takes to the air, leaving ${returnCharacterValue(gladiatorTop, "name")}'s attack to harmlessly pass beneath ${returnCharacterValue(gladiatorBottom, "pronoun3")}`, `${returnCharacterValue(gladiatorBottom, "name")} twists mid-flight, avoiding ${returnCharacterValue(gladiatorTop, "name")}'s strike and countering with a swift peck from ${returnCharacterValue(gladiatorBottom, "pronoun3")} beak, it having little effect, but leaving ${returnCharacterValue(gladiatorBottom, "name")} unharmed`];
+
+        datalistBig.defencesThrikreen = [`${returnCharacterValue(gladiatorBottom, "name")}'s extra set of arms allows ${returnCharacterValue(gladiatorBottom, "pronoun2")} to fend off ${returnCharacterValue(gladiatorBottom, "name")}'s relentless barrage of ${returnSmallValue("armedAttack")}s`, `Utilizing ${returnCharacterValue(gladiatorBottom, "pronoun3")} heightened agility, ${returnCharacterValue(gladiatorBottom, "name")} swiftly evades ${returnCharacterValue(gladiatorTop, "name")}'s powerful swing`, `${returnCharacterValue(gladiatorBottom, "name")}'s chitinous armor deflects ${returnCharacterValue(gladiatorTop, "name")}'s blade, causing sparks to fly and the crowd to gasp in awe`, `${returnCharacterValue(gladiatorBottom, "name")}'s razor-sharp claws clash with ${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorTop, "primaryWeapon")}, creating a screech that echoes throughout the arena`, `In a breathtaking display of acrobatics, ${returnCharacterValue(gladiatorBottom, "name")} leaps above ${returnCharacterValue(gladiatorTop, "name")}'s attack and lands gracefully behind them`, `${returnCharacterValue(gladiatorBottom, "name")}'s superior reflexes allow ${returnCharacterValue(gladiatorBottom, "pronoun2")} to dodge ${returnCharacterValue(gladiatorTop, "name")}'s strike by mere inches, leaving ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent frustrated`, `With a sudden burst of speed, ${returnCharacterValue(gladiatorBottom, "name")} sidesteps ${returnCharacterValue(gladiatorTop, "name")}'s lunge, causing ${returnCharacterValue(gladiatorTop, "pronoun2")} to stumble forward`, `${returnCharacterValue(gladiatorBottom, "name")}'s chitin armor absorbs the force of ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")}, leaving ${returnCharacterValue(gladiatorBottom, "pronoun2")} unharmed and ready for retaliation`, `Using ${returnCharacterValue(gladiatorBottom, "pronoun3")} extra limbs, ${returnCharacterValue(gladiatorBottom, "name")} catches ${returnCharacterValue(gladiatorBottom, "name")}'s weapon mid-swing, forcing their opponent to struggle for control`, `${returnCharacterValue(gladiatorBottom, "name")}'s powerful leap carries ${returnCharacterValue(gladiatorBottom, "pronoun2")} out of harm's way, leaving ${returnCharacterValue(gladiatorTop, "name")}'s attack to connect with nothing but air`, `${returnCharacterValue(gladiatorBottom, "name")} leaps back, further then any human could, to avoid ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")}`, `The impact of ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")}, is absorbed by the natural armour of ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorBottom, "name")} parries the attack of ${returnCharacterValue(gladiatorTop, "name")} with a pair of claws, before preparing for counter attack`, `${returnCharacterValue(gladiatorBottom, "name")} makes an impressive jump, landing behind ${returnCharacterValue(gladiatorTop, "name")}, as the audience cheers`, `${returnCharacterValue(gladiatorBottom, "name")} grabs ${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorTop, "primaryWeapon")} with ${returnCharacterValue(gladiatorBottom, "pronoun3")} claws`, `${returnCharacterValue(gladiatorBottom, "name")}'s extra set of arms allows ${returnCharacterValue(gladiatorBottom, "pronoun3")} to fend off ${returnCharacterValue(gladiatorTop, "name")}'s relentless barrage of {returnSmallValue("armedAttack")}s`, `Utilizing ${returnCharacterValue(gladiatorBottom, "pronoun3")} heightened agility, ${returnCharacterValue(gladiatorTop, "name")} swiftly evades ${returnCharacterValue(gladiatorTop, "name")}'s powerful swing`, `${returnCharacterValue(gladiatorBottom, "name")}'s chitinous armor deflects ${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorTop, "primaryWeapon")}, causing sparks to fly and the crowd to gasp in awe`, `${returnCharacterValue(gladiatorBottom, "name")}'s razor-sharp claws clash with ${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorTop, "primaryWeapon")}, creating a metallic screech that echoes throughout the arena`, `in a breathtaking display of acrobatics, ${returnCharacterValue(gladiatorBottom, "name")} leaps above ${returnCharacterValue(gladiatorTop, "name")}'s attack and lands gracefully behind ${returnCharacterValue(gladiatorTop, "pronoun2")}`, `${returnCharacterValue(gladiatorBottom, "name")}'s superior reflexes allow ${returnCharacterValue(gladiatorBottom, "pronoun2")} to dodge ${returnCharacterValue(gladiatorTop, "name")}'s strike by mere inches, leaving ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent frustrated`, `with a sudden burst of speed, ${returnCharacterValue(gladiatorBottom, "name")} sidesteps ${returnCharacterValue(gladiatorTop, "name")}'s lunge, causing ${returnCharacterValue(gladiatorTop, "pronoun2")} to stumble forward`, `${returnCharacterValue(gladiatorBottom, "name")}'s chitin armor absorbs the force of ${returnCharacterValue(gladiatorTop, "name")}'s strike, leaving ${returnCharacterValue(gladiatorTop, "pronoun2")} unharmed and ready for retaliation`, `Using ${returnCharacterValue(gladiatorBottom, "pronoun3")} extra limbs, ${returnCharacterValue(gladiatorBottom, "name")} catches ${returnCharacterValue(gladiatorTop, "name")}'s ${returnCharacterValue(gladiatorTop, "primaryWeapon")} mid-swing, forcing ${returnCharacterValue(gladiatorBottom, "pronoun3")} opponent to struggle for control`, `${returnCharacterValue(gladiatorBottom, "name")}'s powerful leap carries ${returnCharacterValue(gladiatorBottom, "pronoun2")} out of harm's way, leaving ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("description")}${returnSmallValue("armedAttack")} to connect with nothing but air`];
+
+        datalistBig.defencesCriticals = ["defencesThrikreen", "defencesThrikreen"];
+
+        datalistBig.theHit = [`${returnCharacterValue(gladiatorTop, "name")} ${returnSmallValue("armedAttack")}s ${returnCharacterValue(gladiatorBottom, "name")}${returnSmallValue("description")}, on the ${returnSmallValue("bodyPart")}, causing a ${returnSmallValue("wound")}`, `The strike ${returnCharacterValue(gladiatorTop, "name")} contacts with ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}, which causes a ${returnSmallValue("wound")}`, `${returnCharacterValue(gladiatorBottom, "name")} frowns in pain from the ${returnSmallValue("armedAttack")} on ${returnCharacterValue(gladiatorBottom, "pronoun3")} ${returnSmallValue("bodyPart")} ${returnCharacterValue(gladiatorTop, "name")} caused`];
+
+        datalistBig.specials = [`${returnCharacterValue(gladiatorTop, "name")} throws sand at the eyes of ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} yells ${returnSmallValue("curses")} at ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} riles up the audience`, `The audience cheers at ${returnCharacterValue(gladiatorTop, "name")}`, `A ${returnSmallValue("bloodAmount")} of ${returnCharacterValue(gladiatorTop, "bloodColor")} blood on ${returnSmallValue("bloodHit")}`, `A ${returnSmallValue("bloodAmount")} of ${returnSmallValue("sweatBlood")} ${returnSmallValue("bloodRunning")} down ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("bodyPart")}`, `Both is getting more and more dirty`, `Dust covers the skin and armour of the gladiators`, `The combat is going in ${returnCharacterValue(gladiatorTop, "name")}'s favour`, `${returnCharacterValue(gladiatorTop, "name")} taunts ${returnCharacterValue(gladiatorBottom, "name")} with a mocking dance`, `${returnCharacterValue(gladiatorTop, "name")} spits on the ground in front of ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} flexes ${returnCharacterValue(gladiatorTop, "pronoun3")} muscles to intimidate ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} blows kisses to the crowd, ignoring ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} performs a flashy acrobatic move, showing off ${returnCharacterValue(gladiatorTop, "pronoun3")} abilities`, `${returnCharacterValue(gladiatorTop, "name")} raises ${returnCharacterValue(gladiatorTop, "pronoun3")} weapon high, provoking ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} pretends to stumble, teasing ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} winks at the audience, gaining their favor`, `${returnCharacterValue(gladiatorTop, "name")} twirls ${returnCharacterValue(gladiatorTop, "pronoun3")} weapon skillfully, impressing the spectators`, `${returnCharacterValue(gladiatorTop, "name")} points at ${returnCharacterValue(gladiatorBottom, "name")} and laughs mockingly`, `${returnCharacterValue(gladiatorTop, "name")} bows dramatically, receiving applause from the crowd`, `${returnCharacterValue(gladiatorTop, "name")} wipes the sweat off ${returnCharacterValue(gladiatorTop, "pronoun3")} brow, showing signs of exertion`, `${returnCharacterValue(gladiatorTop, "name")} smirks at ${returnCharacterValue(gladiatorBottom, "name")}, confident in ${returnCharacterValue(gladiatorTop, "pronoun3")} abilities`, `${returnCharacterValue(gladiatorTop, "name")} blows a kiss to a spectator, who cannot hide their atraction to ${returnCharacterValue(gladiatorTop, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} spins around, creating a whirlwind of dust in the arena`, `${returnCharacterValue(gladiatorTop, "name")} stomps ${returnCharacterValue(gladiatorTop, "pronoun3")} foot, causing the ground to shake slightly`, `${returnCharacterValue(gladiatorTop, "name")} clenches ${returnCharacterValue(gladiatorTop, "pronoun3")} fists tightly, ready for the next exchange`, `${returnCharacterValue(gladiatorTop, "name")} adjusts their stance, demonstrating their readiness `, `${returnCharacterValue(gladiatorBottom, "name")} exhales loudly, releasing tension before the next confrontation`, `${returnCharacterValue(gladiatorTop, "name")} glances at the crowd, seeking their approval and support`, `${returnCharacterValue(gladiatorTop, "name")} paces back and forth, keeping ${returnCharacterValue(gladiatorBottom, "name")} on edge`, `${returnCharacterValue(gladiatorTop, "name")} taps ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "primaryWeapon")} against ${returnCharacterValue(gladiatorTop, "pronoun3")} ${returnCharacterValue(gladiatorTop, "secondaryWeapon")}, creating an intimidating sound`, `${returnCharacterValue(gladiatorTop, "name")} licks ${returnCharacterValue(gladiatorTop, "pronoun3")} lips, savoring the anticipation of victory`, `${returnCharacterValue(gladiatorTop, "name")} raises an eyebrow, waiting for ${returnCharacterValue(gladiatorBottom, "name")} to make a move`, `${returnCharacterValue(gladiatorTop, "name")} raises ${returnCharacterValue(gladiatorTop, "pronoun3")} arms triumphantly, reveling in the cheers of the audience`, `The crowd erupts in excitement as ${returnCharacterValue(gladiatorTop, "name")} delivers a powerful blow `, `The fans of ${returnCharacterValue(gladiatorBottom, "name")} gasp in awe at a skillful dodge by their favorite fighter`, `Chants of "${returnCharacterValue(gladiatorTop, "name")}! ${returnCharacterValue(gladiatorTop, "name")}!" echo through the arena`, `A hush falls over the audience as ${returnCharacterValue(gladiatorBottom, "name")} launches a surprise attack`, `The fans of ${returnCharacterValue(gladiatorTop, "name")} jump to their feet, waving banners and cheering wildly`, `The fans of ${returnCharacterValue(gladiatorBottom, "name")} exchange heated words with the fans of ${returnCharacterValue(gladiatorTop, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} taunts the crowd, provoking a mix of laughter and cheers`, `The audience roars with anticipation as the gladiators circle each other`, `A collective gasp fills the air from the audience`, `The fans of both gladiators engage in a fierce rivalry, shouting insults and challenges`, `The crowd goes wild`, `A wave of excitement sweeps through the audience as ${returnCharacterValue(gladiatorTop, "name")} showcases incredible agility`, `The fans of ${returnCharacterValue(gladiatorTop, "name")} shower their fighter with praise and encouragement`, `${returnCharacterValue(gladiatorTop, "name")}'s trainer pumps their fist in the air, shouting words of motivation`, `The spectators hold their breath as ${returnCharacterValue(gladiatorBottom, "name")} narrowly avoids a lethal strike`, `The fans of ${returnCharacterValue(gladiatorTop, "name")} erupt with joy`, `The crowd rises to their feet, applauding both gladiators for their valiant efforts`, `A deafening roar from the tribune fills the arena`, `The audiense boohs loudly`, `A ${returnCharacterValue(gladiatorBottom, "sex")} streaker runs across the arena`, `${returnCharacterValue(gladiatorTop, "name")}'s face was a mask of determination, streaked with sweat and smeared with blood.`, `Blood-soaked sand clings to ${returnCharacterValue(gladiatorTop, "name")}'s boots`];
+
+        datalistBig.finisher = [`${returnCharacterValue(gladiatorTop, "name")} takes out a small knife, and makes a small cut on ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("facePart")}`, `${returnCharacterValue(gladiatorTop, "name")} places a kiss on ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("facePart")}`, `${returnCharacterValue(gladiatorTop, "name")} licks ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("facePart")}`, `${returnCharacterValue(gladiatorTop, "name")} spits on ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} pulls out a hair of ${returnCharacterValue(gladiatorBottom, "name")}'s head`, `${returnCharacterValue(gladiatorTop, "name")} pours sand on ${returnCharacterValue(gladiatorTop, "name")}'s ${returnSmallValue("bodyPart")}`, `${returnCharacterValue(gladiatorTop, "name")} urinates on ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} verbaly abuses ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} performs a derogatory dance`, `${returnCharacterValue(gladiatorTop, "name")} bows mockingly for ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} makes complicated hand gestures`, `${returnCharacterValue(gladiatorTop, "name")} moons ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} lifts up ${returnCharacterValue(gladiatorBottom, "name")} with a roar of strength`, `${returnCharacterValue(gladiatorTop, "name")} runs around the arena, singing loudly`, `${returnCharacterValue(gladiatorTop, "name")} sings an improvised dirty song for ${returnCharacterValue(gladiatorBottom, "name")} `, `${returnCharacterValue(gladiatorTop, "name")} smears ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnCharacterValue(gladiatorBottom, "bloodColor")} blood across ${returnCharacterValue(gladiatorBottom, "pronoun3")} own face`, `${returnCharacterValue(gladiatorTop, "name")} bites into ${returnCharacterValue(gladiatorBottom, "name")}'s flesh`, `${returnCharacterValue(gladiatorTop, "name")} lifts up ${returnCharacterValue(gladiatorBottom, "name")} and gives them a headbutt`];
+
+        datalistBig.finisherPsionics = [`${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic powers to telekinetically lift ${returnCharacterValue(gladiatorBottom, "name")} and toss ${returnCharacterValue(gladiatorBottom, "pronoun2")} aside like a ragdoll`, `${returnCharacterValue(gladiatorTop, "name")} channels ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic energy into a devastating psychic blast, leaving ${returnCharacterValue(gladiatorBottom, "name")} disoriented and vulnerable`, `${returnCharacterValue(gladiatorTop, "name")} uses ${returnCharacterValue(gladiatorTop, "pronoun3")} psionic abilities to create illusions of ${returnSmallValue("elements")}, dancing around ${returnCharacterValue(gladiatorBottom, "name")}`, `${returnCharacterValue(gladiatorTop, "name")} unleashes a barrage of psionic projectiles, each one striking around ${returnCharacterValue(gladiatorBottom, "name")}'s body without hitting`, `${returnCharacterValue(gladiatorTop, "name")} projects a colorfull aura`, `${returnCharacterValue(gladiatorTop, "name")} uses psionic powers to give ${returnCharacterValue(gladiatorBottom, "name")} a temperary tatoo, lasting for the rest of the month`, `${returnCharacterValue(gladiatorTop, "name")} manifests a psionic whip, lashing ${returnCharacterValue(gladiatorBottom, "name")}'s ${returnSmallValue("bodyPart")}`]; 
+}; 
+
+
+
+            setSmallValues();
+            setBigValues();
+
+            console.log(datalistBig);
+
+
+
+
+        </script>
+    </body>
+</html>
