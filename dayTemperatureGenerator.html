@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <input type="button" value="generate day" onclick="generateDay()">
+        <div id="appendHere"></div>
+
+        <br>data from:<br>
+        <a href="https://www.reddit.com/r/DarkSun/comments/16hkizt/daily_temperature_and_illumination/">https://www.reddit.com/r/DarkSun/comments/16hkizt/daily_temperature_and_illumination/</a>
+        
+        
+        
+        <script type="text/javascript">
+dayData = [
+{"time" : 0, "tempLow" : 16, "tempHigh" : 25},
+{"time" : 1, "tempLow" : 16, "tempHigh" : 25},
+{"time" : 2, "tempLow" : 11, "tempHigh" : 20},
+{"time" : 3, "tempLow" : 11, "tempHigh" : 20},
+{"time" : 4, "tempLow" : 6, "tempHigh" : 15},
+{"time" : 5, "tempLow" : 1, "tempHigh" : 10},
+{"time" : 6, "tempLow" : 6, "tempHigh" : 15},
+{"time" : 7, "tempLow" : 11, "tempHigh" : 20},
+{"time" : 8, "tempLow" : 16, "tempHigh" : 25},
+{"time" : 9, "tempLow" : 26, "tempHigh" : 35},
+{"time" : 10, "tempLow" : 31, "tempHigh" : 40},
+{"time" : 11, "tempLow" : 36, "tempHigh" : 45},
+{"time" : 12, "tempLow" : 41, "tempHigh" : 50},
+{"time" : 13, "tempLow" : 51, "tempHigh" : 60},
+{"time" : 14, "tempLow" : 51, "tempHigh" : 60},
+{"time" : 15, "tempLow" : 46, "tempHigh" : 55},
+{"time" : 16, "tempLow" : 36, "tempHigh" : 45},
+{"time" : 17, "tempLow" : 36, "tempHigh" : 45},
+{"time" : 18, "tempLow" : 31, "tempHigh" : 40},
+{"time" : 19, "tempLow" : 31, "tempHigh" : 40},
+{"time" : 20, "tempLow" : 26, "tempHigh" : 35},
+{"time" : 21, "tempLow" : 26, "tempHigh" : 35},
+{"time" : 22, "tempLow" : 21, "tempHigh" : 30},
+{"time" : 23, "tempLow" : 21, "tempHigh" : 30}];
+
+var temperature = 16;
+
+function generateDay() { //generates temperature of the day
+    var dayDataLength = 24;
+    var appendHere = document.getElementById("appendHere");
+
+    appendHere.innerHTML = "";
+
+    for (var i = 0; i < 24; i++) {
+
+        returnTemperature(i);
+        var tempI = i + 1;
+        appendHere.innerHTML += `Time of day: ${i} - ${tempI}, Temperature: ${temperature}°C<br>`;
+    }
+}
+
+function returnTemperature(time) { //add or subtracts 0-4 degrees to the temperature, if it is higher or lower then maximum/minimum for the hour, the value is set to that hours max/min
+    var upOrDown = upDown();
+    var tempValue = Math.floor(Math.random() * 5);
+
+    if (upOrDown == 0) {
+        temperature += tempValue;
+    } else {
+        temperature -= tempValue;
+    }
+
+    if (temperature < dayData[time].tempLow) {
+        temperature = dayData[time].tempLow;
+    } else if (temperature > dayData[time].tempHigh) {
+        temperature = dayData[time].tempHigh;
+
+    }
+
+}
+
+function upDown() { //returns 0, add, or 1, subtract, from the present temperature
+    return Math.floor(Math.random() * 2);
+}
+
+        </script>
+    </body>
+</html>
