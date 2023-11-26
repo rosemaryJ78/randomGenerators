@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <input type="button" value="Generate Lizards" onclick="generateLizards()">
+
+<div id="missionText"></div>
+<br><br>
+data from :<br>
+Scale, Tail, and Claw<br>
+<a href="https://athas.org/products/STC/documents/305aa6ce-df77-4db3-bf61-bad9ea8e902e">https://athas.org/products/STC/documents/305aa6ce-df77-4db3-bf61-bad9ea8e902e</a>
+
+        <script type="text/javascript">
+
+//Data from Scale, Tail, and Claw https://athas.org/products/STC/documents/305aa6ce-df77-4db3-bf61-bad9ea8e902e
+
+        var dataList = {
+
+            siltrunnerMaleFirst: [ "Ak", "Chi", "Ga", "Mi", "Ury"], 
+
+            siltrunnerMaleMiddle: [ "at", "in", "miri", "k", "i"],
+
+            siltrunnerMaleLast: [ "it", "kha", "it", "daw", "saw"],
+
+            siltrunnerFemaleFirst: [ "Am", "Hi", "Ni", "Wi", "Ki"],
+
+            siltrunnerFemaleMiddle: [ "ai", "ya", "yak", "i", "nu"],
+
+            siltrunnerFemaleLast: [ "ri", "kha", "ni", "ha", "mok"],
+
+            tortleMaleFirst : [ "Bao", "Chu", "Gaan", "L", "Quun"],
+
+            tortleMaleLast : [ "muunh", "yul", "hyu", "luunha", "loor"],
+
+            tortleFemaleFirst : [ "Caam", "Chi", "De", "Od", "Na"],
+
+            tortleFemaleLast : [ "tsaang", "paang", "bao", "chi", "raanh"],
+
+            jozhalMale : [ "Alos", "Dacius", "Elicos", "Mhai", "Nymos"], 
+
+            jozhalFemale : [ "Hrit", "Lris", "Juba", "Mrcea", "Tiega"],
+
+            ssuranMale: [ "Chava’ssh", "Iss’orin", "Holo’ssh", "Sta’ssa", "Thuuss", "Ule’uss", "Zath’ess"],
+
+            ssuranFemale: [ "Kanaka’ssh", "Ist’uessh", "Lieth", "Mok’uahi’ssh", "Ss’aiana", "Uth’ess", "Vassh’ess"],
+
+            lizardfolkFirst : [ "Nely", "Ma", "Mo", "Jho", "Xhen", "Sle", "Ju"], 
+
+            lizardfolkLast : [ "ub", "rid", "ban", "bji", "lani", "rox ", "sky"],
+
+            nikaalMaleFirst : [ "Jesar", "Kae", "Mik", "Mut", "Tae", "Tes", "Tsaer", "Zae"],
+
+            nikaalMaleLast : [ "rar", "lis", "asis", "laas", "lal", "res", "len"],
+
+            nikaalFemaleFirst : [ "Dae", "Kil", "Lek", "Qae", "Rika", "Sali", "Ska", "Vik"],
+
+            nikaalFemaleLast : [ "li", "'ko", "la", "sai", "saen", "lika"],
+
+            drayMaleFirst : [ "Ak", "Ab", "Ba", "Fal", "Ga", "Ka", "Ma", "Man", "Mon", "Mo", "Zar"],
+
+            drayMaleLast : [ "sak", "wroth", "verom", "foun", "serex", "tlakk", "rom", "laar", "zharom", "rag", "'kat Dar"],
+
+            drayFemaleFirst : [ "Ad", "Bita", "Ca", "Frei", "Lod", "Ma", "Ve", "Xa", "Xon"],
+
+            drayFemaleLast : [ "tra", "yana", "nagi", "rai", "gden", "ha", "sskka", "sha", "heva"],
+
+            pterranLifepathFirst: [ "Dream", "Gold", "Silver", "One", "Rain", "Spirit", "Terror", "Water", "Wind"],
+
+            pterranLifepathLast: [ "flight", "eye", "sight", "keeper", "-ally", "claw", "tender", "spine"],
+
+            pterranFirst: [ "Air", "Dark", "Earth", "Quest", "Sun", "Cloud", "Green", "Life", "Wind"],
+
+            pterranFemaleLast: [ "daughter", "sister", "sun", "song", "quest", "tail", "rider", "scale", "hearth", "dance"],
+
+            pterranMaleLast: [ "son", "brother", "sun", "song", "quest", "tail", "rider", "scale", "hearth", "dance"]        
+
+                };       
+
+            function generateLizards() { //Generates a string with a list of names from the lists above
+                document.getElementById("missionText").innerHTML = `
+
+                Todays lizard menagerie contains:<br><br>
+                A male tortle called: ${returnValue("tortleMaleFirst")}${returnValue("tortleMaleLast")}<br>
+                A female tortle called: ${returnValue("tortleFemaleFirst")}${returnValue("tortleFemaleLast")}<br><br>
+
+                A male jozhal called: ${returnValue("jozhalMale")}<br>
+                A female jozhal called: ${returnValue("jozhalFemale")}<br><br>
+
+                A male ssuran called: ${returnValue("ssuranMale")}<br>
+                A female ssuran called: ${returnValue("ssuranFemale")}<br><br>
+
+                A male lizardfolk called: ${returnValue("lizardfolkFirst")}${returnValue("lizardfolkLast")}<br>
+                A female lizardfolk called: ${returnValue("lizardfolkFirst")}${returnValue("lizardfolkLast")}<br><br>
+
+                A male nikaal called: ${returnValue("nikaalMaleFirst")}${returnValue("nikaalMaleLast")}<br>
+                A female nikaal called: ${returnValue("nikaalFemaleFirst")}${returnValue("nikaalFemaleLast")}<br><br>
+
+                A male dray called: ${returnValue("drayMaleFirst")}${returnValue("drayMaleLast")}<br>
+                A female dray called: ${returnValue("drayFemaleFirst")}${returnValue("drayFemaleLast")}<br><br>
+
+                A male siltrunner called: ${returnValue("siltrunnerMaleFirst")}${returnValue("siltrunnerMaleMiddle")}${returnValue("siltrunnerMaleLast")}<br>
+                A female siltrunner called: ${returnValue("siltrunnerFemaleFirst")}${returnValue("siltrunnerFemaleMiddle")}${returnValue("siltrunnerFemaleLast")}<br><br>
+
+                A male pterran called: ${returnValue("pterranLifepathFirst")}${returnValue("pterranLifepathLast")} ${returnValue("pterranFirst")}${returnValue("pterranMaleLast")}<br>
+                A female pterran called: ${returnValue("pterranLifepathFirst")}${returnValue("pterranLifepathLast")} ${returnValue("pterranFirst")}${returnValue("pterranFemaleLast")}<br><br>
+                
+                
+                `;
+
+            }
+
+                 
+
+            // A male lizardfolk called: ${returnValue("")}${returnValue("")}<br>
+            //     A female lizardfolk called: ${returnValue("")}${returnValue("")}<br>
+
+            function returnValue(list) { //Returns a value from the lists to the string string
+                var listLength = dataList[list].length;
+
+                return dataList[list][Math.floor(Math.random() * listLength)];
+            }
+
+            generateLizards(); //Generates a mission when loading page
+
+        </script>
+    </body>
+</html>
